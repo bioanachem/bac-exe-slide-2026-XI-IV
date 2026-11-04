@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <title>第11回 演習問題 - 分析化学演習</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #0366d6;
+            padding-bottom: 10px;
+            color: #2c3e50;
+        }
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .nav-btn {
+            background-color: #0366d6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .nav-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .question-select {
+            padding: 6px 12px;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .problem-container {
+            display: none;
+        }
+        .problem-container.active {
+            display: block;
+        }
+        .problem-box {
+            background-color: #fdfefe;
+            border: 1px solid #e1e4e8;
+            border-left: 4px solid #0366d6;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0 15px 0;
+        }
+        .problem-title {
+            font-weight: bold;
+            color: #0366d6;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .choices {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        .choices li {
+            margin-bottom: 8px;
+        }
+        details.answer-accordion {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        summary.answer-summary {
+            background-color: #e1e4e8;
+            color: #24292e;
+            font-weight: bold;
+            padding: 12px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+        summary.answer-summary:hover {
+            background-color: #d1d5da;
+        }
+        .answer-content {
+            padding: 20px;
+            background-color: #ffffff;
+            border-top: 1px solid #e1e4e8;
+        }
+        .answer-content ol {
+            padding-left: 20px;
+        }
+        .answer-content li {
+            margin-bottom: 12px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .problem-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>第11回 演習問題</h1>
+
+    <!-- 上部ナビゲーション -->
+    <div class="question-nav">
+        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <select id="questionSelect" class="question-select" onchange="jumpToQuestion(this.value)">
+            <option value="1">問 1</option>
+            <option value="2">問 2</option>
+            <option value="3">問 3</option>
+            <option value="4">問 4</option>
+            <option value="5">問 5</option>
+            <option value="6">問 6</option>
+            <option value="7">問 7</option>
+            <option value="8">問 8</option>
+            <option value="9">問 9</option>
+            <option value="10">問 10</option>
+        </select>
+        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+    </div>
+
+    <!-- ==================== 問 1 ==================== -->
+    <div id="q1" class="problem-container active">
+        <div class="problem-box">
+            <div class="problem-title">【問 1】</div>
+            <p>電気泳動において、イオン性物質の移動速度と比例するのはどれか。1つ選べ。</p>
+            <ol class="choices">
+                <li>イオン性物質の半径</li>
+                <li>イオン性物質の電荷</li>
+                <li>溶液の粘度</li>
+                <li>溶液のpH</li>
+                <li>電極間の距離</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>2</strong></p>
+                <p><strong>【解説】</strong></p>
+                <p>電気泳動におけるイオン性物質の移動速度（泳動速度 <i>v</i>）は、イオンを球形粒子と近似し、ストークスの法則を適用すると、電場の強さを <i>E</i>、イオンの電荷を <i>q</i>、溶液の粘度を <i>η</i>、イオンの半径を <i>r</i> として、以下の式で表されます。</p>
+                <p style="text-align: center;"><i>v</i> = (<i>q</i>・<i>E</i>) / (6<i>π</i><i>η</i><i>r</i>)</p>
+                <ol>
+                    <li><strong>誤り：</strong> 泳動速度はイオンの半径 <i>r</i> に<strong>反比例</strong>します。</li>
+                    <li><strong>正しい：</strong> 泳動速度はイオンの電荷 <i>q</i> に<strong>比例</strong>します。</li>
+                    <li><strong>誤り：</strong> 溶液の粘度 <i>η</i> に<strong>反比例</strong>します。</li>
+                    <li><strong>誤り：</strong> pHはイオンの解離状態（電荷）を変化させますが、泳動速度と直接比例する関係ではありません。</li>
+                    <li><strong>誤り：</strong> 電場の強さ <i>E</i> = <i>V</i> / <i>d</i> （<i>V</i>: 電圧、<i>d</i>: 電極間距離）であるため、電極間の距離 <i>d</i> に<strong>反比例</strong>します（電圧が一定の場合）。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 2 ==================== -->
+    <div id="q2" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 2】</div>
+            <p>電気泳動において、イオンの泳動速度に関する記述のうち、正しいものはどれか。2つ選べ。</p>
+            <ol class="choices">
+                <li>イオンの電荷に反比例する。</li>
+                <li>イオンの半径に比例する。</li>
+                <li>溶媒の粘度に反比例する。</li>
+                <li>電極間の距離に反比例する。</li>
+                <li>温度の平方根に比例する。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>3, 4</strong></p>
+                <p><strong>【解説】</strong></p>
+                <p>問1と同様に、ストークスの法則に基づく泳動速度の式を用いて確認します。</p>
+                <p style="text-align: center;"><i>v</i> = (<i>q</i>・<i>V</i>) / (6<i>π</i><i>η</i><i>r</i>・<i>d</i>)</p>
+                <p>ここで、<i>V</i> は電圧、<i>d</i> は電極間の距離です。</p>
+                <ol>
+                    <li><strong>誤り：</strong> 電荷 <i>q</i> に<strong>比例</strong>します。</li>
+                    <li><strong>誤り：</strong> 半径 <i>r</i> に<strong>反比例</strong>します。</li>
+                    <li><strong>正しい：</strong> 溶媒の粘度 <i>η</i> に<strong>反比例</strong>します。</li>
+                    <li><strong>正しい：</strong> 電極間の距離 <i>d</i> に<strong>反比例</strong>します（電圧が一定の場合、距離が長くなると電場が弱くなるため）。</li>
+                    <li><strong>誤り：</strong> 温度と泳動速度の間に、一般的に平方根に比例する関係はありません。温度が上昇すると溶媒の粘度が低下するため、一般に泳動速度は大きくなります。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 3 ==================== -->
+    <div id="q3" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 3】</div>
+            <p>電気泳動法に関する記述のうち、正しいものはどれか。2つ選べ。</p>
+            <ol class="choices">
+                <li>イオン性物質の移動速度は電場の強さに比例する。</li>
+                <li>SDS-ポリアクリルアミドゲル電気泳動では、タンパク質は陽極から陰極に向かって泳動される。</li>
+                <li>SDS-ポリアクリルアミドゲル電気泳動では、ゲルの濃度が高いほど、タンパク質の移動度が大きくなる。</li>
+                <li>等電点電気泳動では、電極間にpH勾配を形成させてタンパク質の分離を行う。</li>
+                <li>アガロースゲル電気泳動でDNAを分離するには、試料に臭化エチジウムを加える必要がある。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 4</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> 移動速度 <i>v</i> = <i>μ</i>・<i>E</i> （<i>μ</i>: 泳動度、<i>E</i>: 電場の強さ）より、移動速度は電場の強さに比例します。</li>
+                    <li><strong>誤り：</strong> SDS-PAGEでは、SDS（陰イオン性界面活性剤）がタンパク質に結合して負に帯電するため、<strong>陰極（−）から陽極（＋）</strong>に向かって泳動されます。</li>
+                    <li><strong>誤り：</strong> ゲル濃度が高い（網目が細かい）ほど分子ふるい効果が強くなるため、タンパク質の移動度は<strong>小さく</strong>なります。</li>
+                    <li><strong>正しい：</strong> 等電点電気泳動では、両性電解質などを用いてゲル内にpH勾配をつくり、タンパク質が自身の等電点（正味の電荷がゼロになるpH）に達することで分離します。</li>
+                    <li><strong>誤り：</strong> 臭化エチジウム（EtBr）はDNAの検出（染色）の段階で用いられ、分離そのものに加える必要はありません。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 4 ==================== -->
+    <div id="q4" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 4】</div>
+            <p>電気泳動法に関する記述のうち、正しいものはどれか。2つ選べ。</p>
+            <ol class="choices">
+                <li>pH 2.0 の泳動液を用いてろ紙電気泳動を行うと、グリシンは陽極方向に泳動される。</li>
+                <li>SDS-ポリアクリルアミドゲル電気泳動では、一般に、タンパク質はそのアミノ酸残基の数に比例したSDS分子が結合した状態で泳動される。</li>
+                <li>SDS-ゲル電気泳動法では、物質の分子量は分離にほとんど影響しない。</li>
+                <li>等電点電気泳動法では、物質の分子量は分離にほとんど影響しない。</li>
+                <li>アガロースゲル電気泳動でDNAが分子サイズによって分離できるのは、DNAごとに単位電荷当りの質量が異なるからである。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>2, 4</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> グリシンの等電点（pI）は約6.0です。pH 2.0の強い酸性条件下ではアミノ基がプロトン化して正（＋）に帯電するため、<strong>陰極（−）方向</strong>へ移動します。</li>
+                    <li><strong>正しい：</strong> SDS-PAGEでは、SDSがタンパク質の質量にほぼ一定の割合（およそ2アミノ酸に対して１分子のSDS）で結合します。そのため、タンパク質の大きさに応じた負電荷が付与され、タンパク質本来の電荷や形状の影響が小さくなります。</li>
+                    <li><strong>誤り：</strong> SDS-PAGEではゲルの分子ふるい効果を利用して<strong>分子量の違い</strong>に基づいて分離するため、分子量は分離に大きく影響します。</li>
+                    <li><strong>正しい：</strong> 等電点電気泳動法は、主に分子の「等電点（正味の電荷がゼロになるpH）」の違いによって分離するため、分子量は分離にほとんど影響しません。</li>
+                    <li><strong>誤り：</strong> DNAは長さに関わらず、単位塩基（リン酸基）あたりの電荷がほぼ一定です。分子サイズで分離できるのは、アガロースゲルの網目構造による分子ふるい効果のためです。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 5 ==================== -->
+    <div id="q5" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 5】</div>
+            <p>A群に示す目的で汎用される検出法を、B群の中から選びなさい。</p>
+            <p style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8;">
+                (1) タンパク質を非特異的に検出する方法<br>
+                (2) 核酸を配列非特異的に検出する方法<br>
+                (3) タンパク質をアミノ酸配列あるいは構造特異的に検出する方法<br>
+                (4) RNAを配列特異的に検出する方法<br>
+                (5) DNAを配列特異的に検出する方法
+            </p>
+            <p style="margin-top: 15px; font-weight: bold; color: #555;">【B群の選択肢】</p>
+            <ol class="choices" style="list-style-type: none; padding-left: 0;">
+                <li>① 臭化エチジウム染色</li>
+                <li>② ウエスタンブロッティング</li>
+                <li>③ サザンハイブリダイゼーション</li>
+                <li>④ ノーザンハイブリダイゼーション</li>
+                <li>⑤ CBB染色</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+
+<div class="answer-content">
+    <p><strong>【正解・対応】</strong></p>
+    <ul style="list-style-type: none; padding-left: 0;">
+        <li>(1) タンパク質を非特異的に検出する方法： <strong>⑤ CBB染色</strong><br>
+            <em>解説：</em> クマシーブリリアントブルー（CBB）染色は、ゲル中の多くのタンパク質と結合して青色に染める非特異的な検出法です。</li>
+        <li>(2) 核酸を配列非特異的に検出する方法： <strong>① 臭化エチジウム染色</strong><br>
+            <em>解説：</em> 臭化エチジウムは核酸の塩基対間にインターカレーションし、紫外線を当てると蛍光を発するため、塩基配列に関わらず核酸を非特異的に検出できます。</li>
+        <li>(3) タンパク質をアミノ酸配列あるいは構造特異的に検出する方法： <strong>② ウエスタンブロッティング</strong><br>
+            <em>解説：</em> ウエスタンブロッティングは、目的のタンパク質に特異的な抗体を用いて、抗体が認識するエピトープ（抗原決定基）を介した抗原抗体反応により検出します。エピトープには、連続したアミノ酸配列からなるものや、立体構造によって形成されるものがあります。</li>
+        <li>(4) RNAを配列特異的に検出する方法： <strong>④ ノーザンハイブリダイゼーション</strong><br>
+            <em>解説：</em> ノーザンハイブリダイゼーションは、相補的な塩基配列を持つプローブを用いてRNAを配列特異的に検出する手法です。</li>
+        <li>(5) DNAを配列特異的に検出する方法： <strong>③ サザンハイブリダイゼーション</strong><br>
+            <em>解説：</em> サザンハイブリダイゼーションは、相補的な標識DNAまたはRNAプローブを用いてDNAを配列特異的に検出します。</li>
+    </ul>
+</div>
+           
+        </details>
+    </div>
+
+    <!-- ==================== 問 6 ==================== -->
+    <div id="q6" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 6】</div>
+            <p>マウスのある組織から目的のタンパク質を精製し、その性質を明らかにするため、以下の2つの実験を行った。実験方法と考察に関する記述のうち、正しいものはどれか。2つ選べ。</p>
+            <p style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8;">
+                <strong>【実験1】</strong> 精製したタンパク質のジスルフィド結合を還元後、ドデシル硫酸ナトリウム (SDS)-ポリアクリルアミドゲル電気泳動法を行った。ゲル中のタンパク質を染色すると、単一のバンドが観察された。分子量が既知の5種類の標準タンパク質についても同様の操作を行い、図1の結果を得た。<br>
+                <strong>【実験2】</strong> 精製したタンパク質を用いてゲルろ過クロマトグラフィーを行った。分子量が既知の6種類の標準タンパク質についても同様の操作を行い、図2の結果を得た。
+            </p>
+            <!-- 問6の図（問6図.png を同じフォルダに配置してください） -->
+            <img src="問6図.png" alt="問6の実験図1および図2" class="problem-img">
+
+            <ol class="choices">
+                <li>【実験1】では、電気泳動の前に、試料にSDS と 2-メルカプトエタノール (2-ME) を含む緩衝液を加えて加熱した。</li>
+                <li>【実験1】のタンパク質の染色には、臭化エチジウム (ethidium bromide) を用いた。</li>
+                <li>【実験2】では、カラムから溶出したタンパク質を検出するため、溶出液の 260nm における吸光度を連続的に測定した。</li>
+                <li>【実験1】の結果より、精製したタンパク質の単量体(モノマー)の分子量は、およそ25,000Daと考えられる。</li>
+                <li>【実験1】及び【実験2】の結果より、精製したタンパク質は4量体(テトラマー) として存在すると考えられる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 4</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> 【実験1】（SDS-PAGE）では、タンパク質の変性と負電荷の付与（SDS）、およびジスルフィド結合の還元的な切断（2-メルカプトエタノール：2-ME）のために、これらの試薬を加えて加熱します。</li>
+                    <li><strong>誤り：</strong> タンパク質の染色にはCBB染色や銀染色を用います。臭化エチジウムは<strong>核酸（DNA/RNA）の染色試薬</strong>です。</li>
+                    <li><strong>誤り：</strong> タンパク質の検出には、主に芳香族アミノ酸に基づく<strong>280 nm</strong>の紫外吸光度が用いられます（260 nmは主に核酸の吸収に利用されます）。</li>
+                    <li><strong>正しい：</strong> 【実験1】（SDS-PAGE）の結果から読み取れるサブユニットの分子量は約25,000 Daです。</li>
+                    <li><strong>誤り：</strong> 【実験1】（SDS-PAGE）でのサブユニットの分子量が約25,000 Da、【実験2】（ゲルろ過クロマトグラフィー）で推定された天然状態の分子量が約50,000 Daであることから、50,000 / 25,000 = 2となります。したがって、このタンパク質は天然状態では<strong>2量体（ダイマー）</strong>として存在すると推測されます。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 7 ==================== -->
+    <div id="q7" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 7】</div>
+            <p>タンパク質Ｘを含む細胞抽出液（試料ア）をドデシル硫酸ナトリウムポリアクリルアミドゲル電気泳動（SDS-PAGE）及びサイズ排除クロマトグラフィー（SEC）により分析した。SDS-PAGE に際し、試料 ア にSDS と2-メルカプトエタノールを添加して前処理した（試料 イ ）。図1 のレーンＡは分子量が 25 kDa、35 kDa、40 kDa、55 kDa の 4 種の分子量マーカータンパク質を示し、レーンＢは試料 イ を分離したときの泳動結果である。図2 は精製したタンパク質Ｘ溶液（試料 ウ）と上記の 4 種の分子量マーカータンパク質を混合して分離したときのクロマトグラムである。以下の記述のうち、正しいのはどれか。2つ選べ。</p>
+            
+            <!-- 問7の図（問7図.png を同じフォルダに配置してください） -->
+            <img src="問7図.png" alt="問7の図1および図2" class="problem-img">
+
+            <ol class="choices">
+                <li>SDS-PAGEでは、試料イのようにタンパク質をSDS と2-メルカプトエタノールで酸化的に前処理することで分子量に基づいた分離が可能になる。</li>
+                <li>SDS-PAGE において、タンパク質は陰極から陽極に向かって移動する。</li>
+                <li>タンパク質Xの分子量は、40 kDa から 55 kDa の間である。</li>
+                <li>SEC の固定相として、オクタデシルシリル化シリカゲルが用いられる。</li>
+                <li>SEC によりタンパク質Xが単量体として溶出されるとき、そのピークは④である。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>2, 3</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> 2-メルカプトエタノールはジスルフィド結合を<strong>還元的に</strong>開裂させる還元剤です（酸化処理ではありません）。</li>
+                    <li><strong>正しい：</strong> SDSが結合したタンパク質は負に帯電するため、電気泳動では<strong>陰極（−）から陽極（＋）</strong>へ泳動されます。</li>
+                    <li><strong>正しい：</strong> マーカー（55 kDa、40 kDaなど）と比較すると、タンパク質Xのバンドは40 kDaと55 kDaの間に位置します。</li>
+                    <li><strong>誤り：</strong> サイズ排除クロマトグラフィー（SEC）では多孔質ゲル粒子が用いられます。オクタデシルシリル化シリカゲル（ODS）は<strong>逆相クロマトグラフィー</strong>の固定相です。</li>
+                    <li><strong>誤り：</strong> SECでは大きい分子ほど早く溶出するので、ピークは①55 kDa、②タンパク質X、③40 kDa、④35 kDa、⑤25 kDaの順になります。Xは40〜55 kDaの間なので②になります。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 8 ==================== -->
+    <div id="q8" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 8】</div>
+            <p>二次元電気泳動は、等電点電気泳動とSDSポリアクリルアミドゲル電気泳動（SDS-PAGE）を組み合せたもので、ある生体試料中の多種多様なタンパク質をそれぞれ固有の等電点と分子量の違いを利用して分離する方法である。図1と図2は、二次元電気泳動の概要と実験結果を示したものである。</p>
+<p style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8;">
+<strong>【図1　等電点電気泳動】</strong> pH 4～10の連続的なpH勾配を形成させた棒状のゲルを準備する。このゲルを用いて電気泳動すると、試料中の各タンパク質はそれぞれの等電点の位置までゲル中を移動する。（注：実際にはこの段階ではゲルは染色しないためタンパク質は見えないが、図1の下段では電気泳動後にタンパク質が等電点で分離しているイメージを示した。）<br>
+<strong>【図2　SDS-PAGE】</strong> 等電点電気泳動により試料中のタンパク質を分離した棒状ゲルを、SDS-PAGEの分離ゲルの上に移し、一次元目の等電点電気泳動と直角の方向に電気泳動する。タンパク質は、その分子量に応じた位置まで移動する。<br>
+<strong>【実験結果】</strong> 電気泳動の終了後、泳動用のガラス板から取り出したゲルを洗浄し、クマシーブリリアントブルーでタンパク質を染色したところ、50個のスポットを検出した。図2中のスポットAは、等電点5.8、分子量56,000のタンパク質である。
+</p>
+<p>このようなタンパク質分析法とその実験結果に関する記述のうち、誤っているのはどれか。1つ選べ。</p>
+            
+            <!-- 問8の図（問8図.png を同じフォルダに配置してください） -->
+            <img src="問8図.png" alt="問8の図1および図2" class="problem-img">
+
+            <ol class="choices">
+                <li>等電点が5.8より小さく、かつ分子量が56,000より大きいスポットは4つ検出されている。</li>
+                <li>スポットAのタンパク質では、中性溶液中での分子全体の電荷が負になる。</li>
+                <li>スポットBのタンパク質の等電点は、ほぼ5.8である。</li>
+                <li>スポットCのタンパク質は、分子量56,000より小さい。</li>
+                <li>タンパク質のスポットの位置は、リン酸化により、やや右上方向に移動すると推測される。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>3</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+  <li><strong>正しい：</strong>縦の点線の右（等電点5.8より小さい）で、横の点線の上（分子量56,000より大きい）の領域に、スポットが4つある。</li>
+  <li><strong>正しい：</strong>溶液のpHが等電点よりも高い場合、そのタンパク質は負に帯電する。よって、スポット<strong>A</strong>のタンパク質（等電点5.8）では、中性溶液（pH 7）中での分子全体の電荷が負になる。</li>
+  <li><strong>誤り：</strong>スポット<strong>B</strong>のタンパク質の等電点は、ほぼ6.6である。</li>
+  <li><strong>正しい：</strong>Cは横の点線より下にあり、分子量56,000より小さい。</li>
+  <li><strong>正しい：</strong>タンパク質がリン酸化されると、分子量が増えるとともに等電点が低下する。そのため、タンパク質のスポットの位置は、リン酸化により、やや右上方向に移動すると推測される。</li>
+             </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 9 ==================== -->
+    <div id="q9" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 9】</div>
+            <p>キャピラリー電気泳動に関する次の記述のうち、正しいのはどれか。2つ選べ。</p>
+            <ol class="choices">
+                <li>中性の電解質溶液を満たしたフューズドシリカ製キャピラリーの内壁は、シラノール基の解離により正電荷を帯びる。</li>
+                <li>pH7の電解質溶液を満たしたフューズドシリカ (fused silica)製の毛細管を用いて泳動を行う場合、毛細管内部の溶液は陰極から陽極に向かって移動する。</li>
+                <li>キャピラリーゾーン電気泳動では、泳動液のpHが高いほど、中性試料成分の泳動速度が遅くなる。</li>
+                <li>ミセル動電クロマトグラフィーでは、泳動液にイオン性界面活性剤を添加することで、中性物質の分離が達成される。</li>
+                <li>検出器として紫外可視吸光光度計や蛍光光度計が用いられる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>4, 5</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> フューズドシリカ内壁のシラノール基（-Si-OH）は、中性～アルカリ性溶液中で解離して-Si-O<sup>-</sup>となり、<strong>負電荷</strong>を帯びます。</li>
+                    <li><strong>誤り：</strong> 電気浸透流（EOF）により、キャピラリー内の溶液は<strong>陽極から陰極</strong>に向かって移動します。</li>
+                    <li><strong>誤り：</strong> pHが高いほどシラノール基の解離が進んで電気浸透流が速くなるため、中性試料成分は電気浸透流に伴って<strong>速く</strong>移動します。</li>
+                    <li><strong>正しい：</strong> ミセル動電クロマトグラフィー（MEKC）では、SDSなどのイオン性界面活性剤を添加してミセルを形成させ、中性物質のミセルへの分配の差を利用して分離します。</li>
+                    <li><strong>正しい：</strong> キャピラリー電気泳動の検出器には、紫外可視吸光光度計や蛍光光度計、質量分析計（MS）などが広く用いられます。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 10 ==================== -->
+    <div id="q10" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 10】</div>
+            <p>キャピラリー電気泳動に関する次の記述のうち、正しいのはどれか。2つ選べ。</p>
+            <ol class="choices">
+                <li>キャピラリーゾーン電気泳動でDNAの分離を行う場合、DNAの鎖長が2倍になると泳動速度も2倍になる。</li>
+                <li>液体クロマトグラフィーと比較して、CEで試料の拡散が少ないのは、電気浸透流が層流であるためである。</li>
+                <li>フューズドシリカ製キャピラリーと中性の緩衝液を用いて電気泳動を行うと、陰イオン性物質は中性物質よりも速く泳動される。</li>
+                <li>ミセル動電クロマトグラフィーでは、中性物質とともにイオン性物質の分離も可能である。</li>
+                <li>キャピラリーゲル電気泳動でDNAを分離すると、サイズの小さなものから順に検出される。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>4, 5</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> 自由溶液中のキャピラリーゾーン電気泳動では、DNAの電荷と摩擦抵抗がともに鎖長にほぼ比例して増大するため、電荷/サイズ比がほぼ一定となり、鎖長による分離は困難です。</li>
+                    <li><strong>誤り：</strong> 電気浸透流は、キャピラリー内壁の電気二重層における電場の作用によって生じ、キャピラリー断面内でほぼ平坦な流速分布（栓流）を示します。一方、HPLCなどの圧力駆動流では放物線状の流速分布を示します。そのため、電気浸透流では流速分布の違いによる試料成分の拡散が少なく、高い分離効率が得られます。</li>
+                    <li><strong>誤り：</strong> 陰イオン性物質には陽極方向への電気泳動力が働きます。一方、通常のフューズドシリカ製キャピラリーでは、電気浸透流は陽極から陰極に向かって流れるため、陰イオン性物質の移動は電気浸透流によって妨げられ、中性物質よりも遅く検出されます。</li>
+                    <li><strong>正しい：</strong> ミセル動電クロマトグラフィー（MEKC）は、中性物質だけでなく、電荷をもつイオン性物質の分離にも応用可能です。</li>
+                    <li><strong>正しい：</strong> キャピラリーゲル電気泳動（CGE）では分子ふるい効果が働くため、サイズの小さな（短い）DNAほど速くゲルの網目を通過し、先に検出されます。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- 下部ナビゲーション -->
+    <div class="question-nav">
+        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <select id="questionSelect2" class="question-select" onchange="jumpToQuestion(this.value)">
+            <option value="1">問 1</option>
+            <option value="2">問 2</option>
+            <option value="3">問 3</option>
+            <option value="4">問 4</option>
+            <option value="5">問 5</option>
+            <option value="6">問 6</option>
+            <option value="7">問 7</option>
+            <option value="8">問 8</option>
+            <option value="9">問 9</option>
+            <option value="10">問 10</option>
+        </select>
+        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+    </div>
+
+    <!-- 目次へ戻るリンク -->
+    <a href="index.html" class="back-link">← 目次に戻る</a>
+
+    <!-- ページ切り替えスクリプト -->
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 10;
+
+        function updateDisplay() {
+            for (let i = 1; i <= totalQuestions; i++) {
+                const element = document.getElementById('q' + i);
+                if (element) {
+                    element.classList.remove('active');
+                }
+            }
+            const activeElement = document.getElementById('q' + currentQuestion);
+            if (activeElement) {
+                activeElement.classList.add('active');
+            }
+            document.getElementById('questionSelect').value = currentQuestion;
+            const select2 = document.getElementById('questionSelect2');
+            if (select2) {
+                select2.value = currentQuestion;
+            }
+        }
+
+        function changeQuestion(direction) {
+            currentQuestion += direction;
+            if (currentQuestion < 1) currentQuestion = 1;
+            if (currentQuestion > totalQuestions) currentQuestion = totalQuestions;
+            updateDisplay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function jumpToQuestion(questionNum) {
+            currentQuestion = parseInt(questionNum, 10);
+            updateDisplay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        updateDisplay();
+    </script>
+</body>
+</html>
