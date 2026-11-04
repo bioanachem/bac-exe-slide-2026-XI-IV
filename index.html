@@ -5,60 +5,85 @@
     <meta charset="UTF-8">
     <title>分析化学 演習問題スライド</title>
     <style>
-        /* 読みやすく綺麗なデザインにするための基本的なスタイル */
         body {
             font-family: sans-serif;
             line-height: 1.6;
-            color: #333;
             max-width: 800px;
             margin: 40px auto;
             padding: 0 20px;
-            background-color: #f9f9f9;
+            color: #333;
         }
-        .slide {
-            background: #ffffff;
-            border: 1px solid #ddd;
+        /* 目次のデザイン */
+        .toc {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
             border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 20px 30px;
+            margin: 20px 0 40px 0;
         }
-        h1, h2 {
-            color: #0056b3;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 8px;
+        .toc h2 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            color: #2c3e50;
         }
-        .ans-box {
-            background: #eef9ff;
-            border-left: 4px solid #0056b3;
-            padding: 15px;
-            margin-top: 15px;
+        .toc ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            margin: 8px 0;
+        }
+        .toc a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            border-bottom: 2px solid #eaecef;
+            padding-bottom: 10px;
+        }
+        section {
+            margin-bottom: 50px;
         }
     </style>
 </head>
 <body>
 
-    <!-- スライド1 -->
-    <div class="slide">
-        <h1>分析化学 演習問題</h1>
-        <h2>第1回：中和滴定の基礎とグラフ解析</h2>
-        <p>本日の目標：滴定曲線の変曲点から理論終点を正しく読み解く。</p>
-    </div>
+    <h1>分析化学 演習問題</h1>
 
-    <!-- スライド2 -->
-    <div class="slide">
-        <h2>演習問題 1</h2>
-        <p>濃度不明の酸性水溶液を水酸化ナトリウムで滴定した際のデータについて考えます。</p>
+    <!-- ここから目次 -->
+    <nav class="toc">
+        <h2>目次</h2>
         <ul>
-            <li>滴下量とpHの変化をグラフにプロットする</li>
-            <li>変曲点における微分係数を求める</li>
+            <li><a href="#section1">1. 中和滴定の基礎と計算</a></li>
+            <li><a href="#section2">2. キレート滴定・沈殿滴定</a></li>
+            <li><a href="#section3">3. 酸化還元滴定の応用</a></li>
+            <li><a href="#section4">4. クロマトグラフィーと理論プレート</a></li>
         </ul>
-        
-        <div class="ans-box">
-            <strong>【ヒント・解説】</strong>
-            <p>pHジャンプが最も急峻になる点が中和点（当量点）となります。</p>
-        </div>
-    </div>
+    </nav>
+    <!-- ここまで目次 -->
+
+    <section id="section1">
+        <h2>1. 中和滴定の基礎と計算</h2>
+        <p>ここに中和滴定に関する演習問題や解説が入ります。</p>
+    </section>
+
+    <section id="section2">
+        <h2>2. キレート滴定・沈殿滴定</h2>
+        <p>ここにキレート滴定や沈殿滴定の問題が入ります。</p>
+    </section>
+
+    <section id="section3">
+        <h2>3. 酸化還元滴定の応用</h2>
+        <p>ここに酸化還元滴定の問題が入ります。</p>
+    </section>
+
+    <section id="section4">
+        <h2>4. クロマトグラフィーと理論プレート</h2>
+        <p>ここにクロマトグラフィーや理論プレート計算の問題が入ります。</p>
+    </section>
 
 </body>
 </html>
