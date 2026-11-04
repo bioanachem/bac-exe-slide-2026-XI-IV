@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <title>第9回 演習問題 - 分析化学演習</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #0366d6;
+            padding-bottom: 10px;
+            color: #2c3e50;
+        }
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .nav-btn {
+            background-color: #0366d6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .nav-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .question-select {
+            padding: 6px 12px;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .problem-container {
+            display: none;
+        }
+        .problem-container.active {
+            display: block;
+        }
+        .problem-box {
+            background-color: #fdfefe;
+            border: 1px solid #e1e4e8;
+            border-left: 4px solid #0366d6;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0 15px 0;
+        }
+        .problem-title {
+            font-weight: bold;
+            color: #0366d6;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .choices {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        .choices li {
+            margin-bottom: 8px;
+        }
+        details.answer-accordion {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        summary.answer-summary {
+            background-color: #e1e4e8;
+            color: #24292e;
+            font-weight: bold;
+            padding: 12px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+        summary.answer-summary:hover {
+            background-color: #d1d5da;
+        }
+        .answer-content {
+            padding: 20px;
+            background-color: #ffffff;
+            border-top: 1px solid #e1e4e8;
+        }
+        .answer-content ol {
+            padding-left: 20px;
+        }
+        .answer-content li {
+            margin-bottom: 12px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>第9回 演習問題</h1>
+
+    <!-- 上部ナビゲーション -->
+    <div class="question-nav">
+        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <select id="questionSelect" class="question-select" onchange="jumpToQuestion(this.value)">
+            <option value="1">問 1</option>
+            <option value="2">問 2</option>
+            <option value="3">問 3</option>
+            <option value="4">問 4</option>
+            <option value="5">問 5</option>
+            <option value="6">問 6</option>
+        </select>
+        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+    </div>
+
+    <!-- ==================== 問 1 ==================== -->
+    <div id="q1" class="problem-container active">
+        <div class="problem-box">
+            <div class="problem-title">【問 1】</div>
+            <p>クロマトグラフィーに関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>カラムの長さが２倍になると、保持時間（<i>t</i><sub>R</sub>）は２倍になる。</li>
+                <li>カラムの長さが２倍になると、質量分布比（<i>k</i>'）は２倍になる。</li>
+                <li>カラムの長さが２倍になると、理論段数（<i>N</i>）は２倍になる。</li>
+                <li>カラムの長さが２倍になると、理論段高さ（<i>H</i>）は２倍になる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 3</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> 流速などの条件が同じ場合、移動相の通過時間 <i>t</i><sub>0</sub> はカラム長 <i>L</i> に比例します。保持時間 <i>t</i><sub>R</sub> は <i>t</i><sub>R</sub> = <i>t</i><sub>0</sub>(1 + <i>k</i>') で表され、質量分布比 <i>k</i>' が一定であれば、<i>L</i> が 2 倍になると <i>t</i><sub>R</sub> も 2 倍になります。</li>
+                    <li><strong>誤り：</strong> 質量分布比 <i>k</i>' は、<i>k</i>' = (固定相中の溶質量) / (移動相中の溶質量) で表され、分配平衡で決まります。カラムを長くしても、固定相と移動相はカラムのどの位置でも同じ割合で存在し、溶質の分配の割合は変わらないため、<i>k</i>' は一定です。</li>
+                    <li><strong>正しい：</strong> 条件が同じで理論段高さ <i>H</i> が一定である場合、理論段数 <i>N</i> はカラム長 <i>L</i> を <i>H</i> で割った値（<i>N</i> = <i>L</i> / <i>H</i>）となるため、<i>L</i> が 2 倍になると <i>N</i> も 2 倍になります。（※発展事項：<i>R</i><sub>s</sub> ∝ √<i>N</i> より、分離度は √2 倍になります）</li>
+                    <li><strong>誤り：</strong> 理論段高さ <i>H</i> は1理論段あたりの相当長さであり、条件が同じであればカラム長を変えても一定です。なお、カラム長が同じであれば、<i>H</i> は小さいほど理論段数 <i>N</i> は大きくなり、カラム効率は良くなります。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 2 ==================== -->
+    <div id="q2" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 2】</div>
+            <p>クロマトグラフィーの分離パラメータに関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>ピーク高さと保持時間が同じなら、ピーク幅が狭いほど理論段数（<i>N</i>）は大きい。</li>
+                <li>シンメトリー係数（<i>S</i>）が１より小さいとき、ピークはテーリングしている。</li>
+                <li>カラムの長さが２倍になると、理論段高さ（<i>H</i>）は２倍になる。</li>
+                <li>同一の分離条件で２つの化合物の保持時間が同じ場合、両者の分離係数（<i>α</i>）は１である。</li>
+                <li>分離度（<i>R</i><sub>s</sub>）は、２つのピークの保持時間の関係を示し、ピーク幅に依存しない。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 4</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> 理論段数 <i>N</i> = 16 (<i>t</i><sub>R</sub> / <i>W</i>)<sup>2</sup> より、保持時間 <i>t</i><sub>R</sub> が同じであれば、ピーク幅 <i>W</i> が狭いほど <i>N</i> は大きくなります。</li>
+                    <li><strong>誤り：</strong> ピークの後半が緩やかに下降して尾を引く現象を「テーリング（tailing）」といい、このときシンメトリー係数 <i>S</i> は 1 より大きくなります（1 より小さい場合は、ピークの前側がなだらかに広がる「リーディング（leading）」を示します）。</li>
+                    <li><strong>誤り：</strong> <i>H</i> = <i>L</i> / <i>N</i> であり、<i>N</i> も <i>L</i> に比例するため、条件が同じであればカラム長を2倍にしても理論段高さ <i>H</i> は一定です。</li>
+                    <li><strong>正しい：</strong> 分離係数 <i>α</i> は <i>α</i> = <i>k</i>'<sub>2</sub> / <i>k</i>'<sub>1</sub> で定義され、2つの化合物の保持時間が同じであれば質量分布比も等しくなるため、<i>α</i> = 1 となります。</li>
+                    <li><strong>誤り：</strong> 分離度は、保持時間の差とピーク幅の両方で決まります（<i>R</i><sub>s</sub> = 2(<i>t</i><sub>R2</sub> - <i>t</i><sub>R1</sub>) / (<i>W</i><sub>1</sub> + <i>W</i><sub>2</sub>)）。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 3 ==================== -->
+    <div id="q3" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 3】</div>
+            <p>液体クロマトグラフィーに関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>質量分布比（<i>k</i>'）が小さいほど、試料はカラムに保持されやすい。</li>
+                <li>理論段数（<i>N</i>）が大きい値を示すほど、優れた分離系である。</li>
+                <li>カラムの理論段数は、カラムの長さに依存しない。</li>
+                <li>ピークの完全分離とは、分離度（<i>R</i><sub>s</sub>）1.2 以上を意味する。</li>
+                <li>カラムの理論段高さは、最適流速で最小となる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>2, 5</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> 質量分布比 <i>k</i>' は、固定相中の溶質量と移動相中の溶質量の比（<i>k</i>' = <i>C</i><sub>s</sub><i>V</i><sub>s</sub> / <i>C</i><sub>m</sub><i>V</i><sub>m</sub>）です。<i>k</i>' が小さいほど移動相中に存在する割合が大きく、保持されずに早く溶出します。</li>
+                    <li><strong>正しい：</strong> 理論段数 <i>N</i> が大きいほど分離効率が高くなります（ただし分離には選択性 <i>α</i> や <i>k</i>' も関与します）。</li>
+                    <li><strong>誤り：</strong> <i>N</i> = <i>L</i> / <i>H</i> において、理論段高さ <i>H</i> が一定の条件下では、理論段数はカラム長 <i>L</i> に比例して大きくなります。</li>
+                    <li><strong>誤り：</strong> 一般的な目安として、分離度 <i>R</i><sub>s</sub> ≒ 1.5 でベースラインまでほぼ完全に分離されます。<i>R</i><sub>s</sub> = 1.2 はピーク間が谷になる程度の分離であり、定量には不十分とされることが多いです。</li>
+                    <li><strong>正しい：</strong> 最適流速とはバンドの広がりを示す理論段高さ <i>H</i> が最小になる流速です（Van Deemter の式 <i>H</i> = <i>A</i> + <i>B</i>/<i>u</i> + <i>C</i><i>u</i> において、低流速での縦拡散 <i>B</i>/<i>u</i> と高流速での物質移動抵抗 <i>C</i><i>u</i> のバランスで極小値をとります）。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 4 ==================== -->
+    <div id="q4" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 4】</div>
+            <p>以下は日本薬局方アセトアミノフェンの純度試験（液体クロマトグラフィー）の記述の一部である。次の記述のうち、正しいものはどれか。２つ選べ。</p>
+            <p style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8;">
+                <strong>操作条件</strong><br>
+                ・検出器：Ａ 紫外吸光光度計（測定波長：225 nm）<br>
+                ・カラム：内径約 4 mm、長さ約 15 cm のステンレス管に 5 μm の液体クロマトグラフィー用 Ｂ オクタデシルシリル化シリカゲルを充てんする。<br>
+                ・カラム温度：40℃ 付近の一定温度<br>
+                ・移動相：Ｃ pH 4.7 の 0.05 mol/L リン酸二水素カリウム試液／メタノール混液（4：1）<br>
+                ・流量：アセトアミノフェンの保持時間が約 5 分になるように調整する。<br>
+                ・カラムの選定：本品及び 4-アミノフェノール塩酸塩 0.01 g ずつをメタノール 1 mLに溶かし、移動相を加えて 50 mL とする。この液 1 mL をとり、移動相を加えて 10 mL とする。この液に付き、上記の条件で操作するとき、[ Ｄ ] の順に溶出し、その Ｅ 分離度が 7 以上のものを用いる。
+            </p>
+            <ol class="choices">
+                <li>Ａの検出器の光源には、通常、キセノンランプが用いられる。</li>
+                <li>Ｂのオクタデシルシリル化シリカゲルは順相系の固定相である。</li>
+                <li>Ｃの移動相中のメタノール含量を増やすと、アセトアミノフェンの保持時間は短くなる。</li>
+                <li>Ｄは、アセトアミノフェン、4-アミノフェノールの順である。</li>
+                <li>Ｅの条件をみたすとき、分離度が 1.5 以上であるので、2 つのピークは完全分離している。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>3, 5</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> 紫外可視吸光光度検出器の紫外部（225 nm）測定での光源には、重水素放電管（重水素ランプ）が用いられます（キセノンランプは主に蛍光光度計の光源として用いられます）。</li>
+                    <li><strong>誤り：</strong> オクタデシルシリル化シリカゲル（ODS）は無極性固定相であり、極性の高い移動相と組み合わせて用いることで<strong>逆相系</strong>の分離モードとなります。順相系の固定相ではありません。</li>
+                    <li><strong>正しい：</strong> 流量を一定にした場合、逆相クロマトグラフィーにおいて移動相中の有機溶媒（メタノール）の割合を増やすと溶出力が強まり、保持時間は短くなります。</li>
+                    <li><strong>誤り：</strong> 4-アミノフェノールは、アセトアミノフェンより疎水性が低く、逆相系では保持が弱くなります。さらに、pH 4.7 の移動相中ではアミノ基の大部分がプロトン化され、親水性が増すため、保持がいっそう弱くなります。したがって、先に溶出するのは4-アミノフェノールです（溶出順Ｄ：4-アミノフェノール → アセトアミノフェン）。</li>
+                    <li><strong>正しい：</strong> 分離度が 7 以上であれば条件（<i>R</i><sub>s</sub> ≧ 1.5 のベースライン分離）を十分に満たすため、2 つのピークは完全に分離しています。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 5 ==================== -->
+    <div id="q5" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 5】</div>
+            <p>液体クロマトグラフィーを用いて生体成分や薬物を定量分析する際には、高感度化や選択性の向上を目的として誘導体化する場合が多い。誘導体化に関する記述のうち、誤っているものはどれか。１つ選べ。</p>
+            <ol class="choices">
+                <li>プレカラム誘導体化法では、長時間を要する誘導体化反応を利用できる。</li>
+                <li>ニンヒドリンを反応試薬として用いるプレカラム誘導体化法によって、アミノ酸を一斉分析することが可能である。</li>
+                <li>ポストカラム誘導体化法は、試料中の夾雑成分の影響を受けにくい。</li>
+                <li>ポストカラム誘導体化法では、1つの分析対象物から複数の誘導体が生成しても問題ない。</li>
+                <li>ジアステレオマー誘導体化法によって、鏡像異性体を光学不活性なカラムで分離することができる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>2</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> プレカラム法はカラムに注入する前に反応を完結させるため、加熱や長時間を要する反応も利用できます。</li>
+                    <li><strong>誤り：</strong> ニンヒドリンは、イオン交換クロマトグラフィー等で分離したあとに反応させる<strong>ポストカラム法</strong>の代表的な試薬であり、プレカラム法の試薬ではありません。</li>
+                    <li><strong>正しい：</strong> ポストカラム法は、夾雑成分をカラムで分離したあとに反応試薬をオンラインで添加するため、試料マトリックス（夾雑成分）の影響を受けにくいという利点があります。</li>
+                    <li><strong>正しい：</strong> ポストカラム法では分離後に反応が起きるため、仮に1つの対象物から複数の誘導体ができてもプレカラム法のようなピーク分裂は起きず、反応生成比が一定であれば定量に支障ありません。</li>
+                    <li><strong>正しい：</strong> 光学活性な試薬を用いてジアステレオマーに変換すれば、光学不活性な（アキラルな）ODSカラムなどで分離が可能になります。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 6 ==================== -->
+    <div id="q6" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 6】</div>
+            <p>液体クロマトグラフィーを用いた鏡像異性体の分離法には、キラル固定相法、キラル移動相法、ジアステレオマー誘導体化法がある。各法に関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>キラル移動相法では、分析対象物に対する対掌体を移動相溶液に添加してエナンチオマー分離を行う。</li>
+                <li>ジアステレオマー誘導体化法は、誘導体化により通常の分配クロマトグラフィーで分離することを目的とする。</li>
+                <li>あるラセミ混合物を分離したとき、異性体間のピークの分離度（<i>R</i><sub>s</sub>）は 1.2 であった。このとき、2つのピークは完全分離しているといえる。</li>
+                <li>キラルカラムに固定化される光学活性な高分子として、多糖類誘導体やタンパク質が広く用いられている。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>2, 4</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> キラル移動相法は、移動相に光学活性な添加剤を加えることで生じた一過性のジアステレオマー錯体の安定性や分配の差を利用して分離する手法です。</li>
+                    <li><strong>正しい：</strong> ジアステレオマー誘導体化法は、鏡像異性体を物理的性質の異なるジアステレオマーに変換し、通常の分配クロマトグラフィー（逆相カラム等）で分離することを目的とします。</li>
+                    <li><strong>誤り：</strong> 分離度 <i>R</i><sub>s</sub> = 1.2 ではピーク間が谷になる程度の分離であり、ベースラインまで完全に分離された状態（<i>R</i><sub>s</sub> ≧ 1.5 のベースライン分離）とは言えません。</li>
+                    <li><strong>正しい：</strong> キラル固定相法では、セルロース等の多糖類誘導体、シクロデキストリン（環状オリゴ糖）、タンパク質など、不斉認識サイトを持つ光学活性高分子が広く用いられています。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- 下部ナビゲーション -->
+    <div class="question-nav">
+        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <select id="questionSelect2" class="question-select" onchange="jumpToQuestion(this.value)">
+            <option value="1">問 1</option>
+            <option value="2">問 2</option>
+            <option value="3">問 3</option>
+            <option value="4">問 4</option>
+            <option value="5">問 5</option>
+            <option value="6">問 6</option>
+        </select>
+        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+    </div>
+
+    <!-- 目次へ戻るリンク -->
+    <a href="index.html" class="back-link">← 目次に戻る</a>
+
+    <!-- ページ切り替えスクリプト -->
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 6;
+
+        function updateDisplay() {
+            for (let i = 1; i <= totalQuestions; i++) {
+                const element = document.getElementById('q' + i);
+                if (element) {
+                    element.classList.remove('active');
+                }
+            }
+            const activeElement = document.getElementById('q' + currentQuestion);
+            if (activeElement) {
+                activeElement.classList.add('active');
+            }
+            document.getElementById('questionSelect').value = currentQuestion;
+            const select2 = document.getElementById('questionSelect2');
+            if (select2) {
+                select2.value = currentQuestion;
+            }
+        }
+
+        function changeQuestion(direction) {
+            currentQuestion += direction;
+            if (currentQuestion < 1) currentQuestion = 1;
+            if (currentQuestion > totalQuestions) currentQuestion = totalQuestions;
+            updateDisplay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function jumpToQuestion(questionNum) {
+            currentQuestion = parseInt(questionNum, 10);
+            updateDisplay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        updateDisplay();
+    </script>
+</body>
+</html>
