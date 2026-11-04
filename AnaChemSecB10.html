@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <title>第10回 演習問題 - 分析化学演習</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #0366d6;
+            padding-bottom: 10px;
+            color: #2c3e50;
+        }
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .nav-btn {
+            background-color: #0366d6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .nav-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .question-select {
+            padding: 6px 12px;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .problem-container {
+            display: none;
+        }
+        .problem-container.active {
+            display: block;
+        }
+        .problem-box {
+            background-color: #fdfefe;
+            border: 1px solid #e1e4e8;
+            border-left: 4px solid #0366d6;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0 15px 0;
+        }
+        .problem-title {
+            font-weight: bold;
+            color: #0366d6;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .choices {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        .choices li {
+            margin-bottom: 8px;
+        }
+        details.answer-accordion {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        summary.answer-summary {
+            background-color: #e1e4e8;
+            color: #24292e;
+            font-weight: bold;
+            padding: 12px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+        summary.answer-summary:hover {
+            background-color: #d1d5da;
+        }
+        .answer-content {
+            padding: 20px;
+            background-color: #ffffff;
+            border-top: 1px solid #e1e4e8;
+        }
+        .answer-content ol {
+            padding-left: 20px;
+        }
+        .answer-content li {
+            margin-bottom: 12px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>第10回 演習問題</h1>
+
+    <!-- 上部ナビゲーション -->
+    <div class="question-nav">
+        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <select id="questionSelect" class="question-select" onchange="jumpToQuestion(this.value)">
+            <option value="1">問 1</option>
+            <option value="2">問 2</option>
+            <option value="3">問 3</option>
+            <option value="4">問 4</option>
+            <option value="5">問 5</option>
+            <option value="6">問 6</option>
+            <option value="7">問 7</option>
+        </select>
+        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+    </div>
+
+    <!-- ==================== 問 1 ==================== -->
+    <div id="q1" class="problem-container active">
+        <div class="problem-box">
+            <div class="problem-title">【問 1】</div>
+            <p>ガスクロマトグラフィー（GC）に関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>移動相が気体であるため、固定相との吸着・分配平衡に達する時間が短く、高い分離能が得られる。</li>
+                <li>分配型充填剤を用いる方法が、気・液クロマトグラフ法に含まれる。</li>
+                <li>液体クロマトグラフ法と同じく、イオン交換型充填剤も使われる。</li>
+                <li>吸着型充填剤としては、長鎖アルキル基結合シリカゲル、活性炭、アルミナ、ゼオライトなどが用いられる。</li>
+                <li>分離を効果的に行う目的で、カラム温度を一定速度で低下させることがある。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 2</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> GCの移動相は気体であるため、液体に比べて粘性が低く拡散係数が大きく、固定相との間で迅速に平衡状態に達するため高い分離能が得られます。</li>
+                    <li><strong>正しい：</strong> GCは移動相が気体（ガス）であるため「気-液クロマトグラフィー（分配）」および「気-固クロマトグラフィー（吸着）」に大別され、液体を固定相（または担体に保持）とする分配型充填剤を用いる方法は気-液クロマトグラフ法に含まれます。</li>
+                    <li><strong>誤り：</strong> イオン交換は移動相中のイオンと固定相の交換基の間の交換で分離する方法であり、気体を移動相とするGCでは成り立たないため、イオン交換型充填剤は使われません。</li>
+                    <li><strong>誤り：</strong> 長鎖アルキル基結合シリカゲル（ODSなど）は液体クロマトグラフィー（逆相HPLC）の充填剤であり、GCの吸着型充填剤としては活性炭、アルミナ、ゼオライト（モレキュラーシーブ）などが用いられます。</li>
+                    <li><strong>誤り：</strong> 沸点の異なる多成分を効率よく短時間で分離するためには、温度を一定速度で「上昇」させる昇温プログラム法が用いられます（低下させることはありません）。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 2 ==================== -->
+    <div id="q2" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 2】</div>
+            <p>ガスクロマトグラフィー（GC）に関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>熱伝導度検出器を使用する場合には、熱伝導度の大きいヘリウムや水素などをキャリヤーガスとして用いる。</li>
+                <li>水素炎イオン化検出器は、ほとんどすべての無機及び有機化合物を検出できる。</li>
+                <li>アルカリ熱イオン化検出器は、リンやイオウに選択的である。</li>
+                <li>質量分析計（MS）を検出器とする GC-MS は、タンパク質などの高分子化合物及び難揮発性物質の分析に適している。</li>
+                <li>試料の熱安定性や揮発性を高める目的で、トリメチルシリル化などの誘導体化が行われることがある。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 5</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> 熱伝導度検出器（TCD）では、キャリヤーガスと成分ガスの熱伝導度の差を利用するため、熱伝導度が極めて大きい水素やヘリウムがキャリヤーガスとして最適です。</li>
+                    <li><strong>誤り：</strong> 水素炎イオン化検出器（FID）は多くの有機化合物を高感度に検出できますが、水（H<sub>2</sub>O）、二酸化炭素（CO<sub>2</sub>）、一酸化炭素（CO）、窒素（N<sub>2</sub>）などの無機化合物にはほとんど応答しません。</li>
+                    <li><strong>誤り：</strong> アルカリ熱イオン化検出器（FTD / NPD）は、窒素やリン化合物に対して選択的かつ高感度に応答します（イオウに選択的なのは炎光光度検出器：FPDです）。</li>
+                    <li><strong>誤り：</strong> 質量分析計（MS）を検出器とする GC-MS は揮発性で熱安定な化合物向けの分析法であり、タンパク質などの高分子や難揮発性物質の分析には適していません。</li>
+                    <li><strong>正しい：</strong> 極性が高く水素結合を形成しやすい化合物は、GCでは吸着や熱分解を起こしやすいため、トリメチルシリル化などで極性官能基中の活性水素を置換し、極性を下げて揮発性を高めます。これにより熱安定性が改善される場合もあります。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 3 ==================== -->
+    <div id="q3" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 3】</div>
+            <p>ガスクロマトグラフィー（GC）に関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>電子捕獲検出器は、主にC-H結合を有する有機化合物の検出に用いられる。</li>
+                <li>定量には内標準法が用いられるが、絶対検量線法は用いられない。</li>
+                <li>難揮発性物質の誘導体化の1つにトリメチルシリル化がある。</li>
+                <li>カラム恒温槽の温度をある温度から一定速度で上昇させると、上昇させない場合と比較して分離時間が長くなる。</li>
+                <li>電子イオン化及び化学イオン化はガスクロマトグラフィー／質量分析法のイオン化法に用いられる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>3, 5</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> 電子捕獲検出器（ECD）は、主にハロゲン原子やニトロ基などの「電子吸引性基」を持つ化合物に対して高感度に応答します（C-H結合を持つ一般的な有機化合物用の検出器はFIDです）。</li>
+                    <li><strong>誤り：</strong> 内標準法だけでなく、濃度既知の標準溶液を数段階調製し、ピーク面積（高さ）と濃度の検量線を作る絶対検量線法も用いられます。</li>
+                    <li><strong>正しい：</strong> 難揮発性物質の極性基（-OHや-NH<sub>2</sub>など）をトリメチルシリル基（-Si(CH<sub>3</sub>)<sub>3</sub>）等で置換するトリメチルシリル化は、GC分析を行うための代表的な誘導体化法です。</li>
+                    <li><strong>誤り：</strong> 昇温プログラム法（温度を一定速度で上昇させる方法）を用いると、高沸点成分も素早く溶出されるため、恒温（一定温度）の状態と比較して総分離時間は大幅に「短縮」されます。</li>
+                    <li><strong>正しい：</strong> ガスクロマトグラフィー／質量分析法（GC-MS）のイオン化法としては、ハードイオン化法である電子イオン化法（EI）や、比較的ソフトな化学イオン化法（CI）が広く用いられます。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 4 ==================== -->
+    <div id="q4" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 4】</div>
+            <p>以下の記述は、L-バリン（C<sub>5</sub>H<sub>11</sub>NO<sub>2</sub>）の薄層クロマトグラフィー（TLC）に関するものである。</p>
+            <p style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8;">
+                本品 0.10 g を水 25 mL に溶かし、試料溶液とする。試料溶液 5 µL を TLC 用シリカゲルを用いて調製した薄層板にスポットする。次に 1-ブタノール／水／酢酸（100）混液（3：1：1）を展開溶媒として約 10 cm 展開した後、薄層板を 80℃で 30 分間乾燥する。これに試薬 [ Ａ ] アセトン溶液（1→50）を均等に噴霧した後、80℃で 5 分間加熱する。
+            </p>
+            <p>このクロマトグラフィーに関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>このクロマトグラフィーの分離モードはイオン交換である。</li>
+                <li>試薬 [ Ａ ] はニンヒドリンである。</li>
+                <li>L-バリンのスポットは黄色を呈する。</li>
+                <li>試料に L-ロイシン（C<sub>6</sub>H<sub>13</sub>NO<sub>2</sub>）が混在するとき、その <i>R</i><sub>f</sub> 値は L-バリンの <i>R</i><sub>f</sub> 値より小さい。</li>
+                <li>この試験で L-バリンより大きな <i>R</i><sub>f</sub> 値を与える L-ロイシンは、逆相分配クロマトグラフィーにおいて、一般に L-バリンより保持時間が大きくなる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>2, 5</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> シリカゲルによる分離は主に吸着であり、イオン交換ではありません。</li>
+                    <li><strong>正しい：</strong> アミノ酸の検出に用いられる試薬 [Ａ] はニンヒドリンです。</li>
+                    <li><strong>誤り：</strong> ニンヒドリン試薬と一般的な一級アミノ酸との反応により、スポットは紫色（ルーヘマン紫）を呈します。</li>
+                    <li><strong>誤り：</strong> L-ロイシンはL-バリンよりメチレン基が1つ多く、この展開系では <i>R</i><sub>f</sub> 値がL-バリンより大きくなる傾向があります。</li>
+                    <li><strong>正しい：</strong> L-ロイシンはL-バリンより疎水性が高いため、逆相分配クロマトグラフィーでは疎水性固定相との相互作用が強くなり、一般に保持時間が大きくなります。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 5 ==================== -->
+    <div id="q5" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 5】</div>
+            <p>血清試料の前処理において、除タンパクに用いる酸として最も適しているのはどれか。１つ選べ。</p>
+            <ol class="choices">
+                <li>塩酸</li>
+                <li>硝酸</li>
+                <li>硫酸</li>
+                <li>過塩素酸</li>
+                <li>乳酸</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>4</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> 塩酸は、除タンパク用としては一般的ではありません。</li>
+                    <li><strong>誤り：</strong> 硝酸は、除タンパク用としては一般的ではありません。</li>
+                    <li><strong>誤り：</strong> 硫酸は、除タンパク用としては一般的ではありません。</li>
+                    <li><strong>正しい：</strong> 過塩素酸は、トリクロロ酢酸などとともに、血清・血漿の除タンパクに広く用いられる酸です。タンパク質を変性・沈殿させ、上清を分析試料として得られます。</li>
+                    <li><strong>誤り：</strong> 乳酸は、除タンパク用の酸としては一般的ではありません。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 6 ==================== -->
+    <div id="q6" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 6】</div>
+            <p>試料の前処理法に関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>水溶液中の目的成分を有機相に抽出するための有機溶媒として、メタノールやアセトニトリルが適している。</li>
+                <li>水溶液中の目的物質がカルボン酸であれば、水溶液をアルカリ性にすると有機溶媒で抽出されやすくなる。</li>
+                <li>水溶液中の目的成分を有機相に効率的に抽出するために、塩化ナトリウムなどの無機塩を水相に飽和濃度まで添加することがある。</li>
+                <li>水溶液中のタンパク質を不溶化し除去するために添加する酸として、塩酸、硝酸が適している。</li>
+                <li>水溶液中のタンパク質を不溶化し除去するために添加する有機溶媒として、アセトニトリルやメタノールなどが用いられる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>3, 5</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> 水溶液中の目的成分を有機相に抽出する（液-液抽出）ための有機溶媒には、水と混ざり合わないもの（ジエチルエーテル、酢酸エチル、クロロホルムなど）が適しています。メタノールやアセトニトリルは水と完全に混和するため抽出用有機相には適しません。</li>
+                    <li><strong>誤り：</strong> カルボン酸（R-COOH）はアルカリ性にすると解離してイオン型（R-COO<sup>-</sup>）になり水層への親和性が増すため、有機相には抽出されにくくなります。</li>
+                    <li><strong>正しい：</strong> 塩析効果を利用して水相中の目的成分を有機相へ効率よく移行させるため、塩化ナトリウムなどの無機塩を水相に飽和濃度まで添加することが行われます。</li>
+                    <li><strong>誤り：</strong> 除タンパクには、過塩素酸やトリクロロ酢酸などが広く用いられます。塩酸や硝酸は、除タンパク用の酸としては一般的ではありません。</li>
+                    <li><strong>正しい：</strong> 水溶液中のタンパク質を沈殿・不溶化させる目的の除タンパク法では、水と混ざり合ってタンパク質を脱水・変性させるアセトニトリルやメタノールなどの有機溶媒が広く用いられます。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- ==================== 問 7 ==================== -->
+    <div id="q7" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 7】</div>
+            <p>試料の前処理法に関する記述のうち、正しいものはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>除タンパクには、タンパク質変性沈殿法、限外ろ過法などが用いられる。</li>
+                <li>固相抽出では、逆相分配型、順相分配型、吸着型、イオン交換型などの固相が用いられる。</li>
+                <li>固相抽出の抽出効率は、溶媒抽出に比べて劣る。</li>
+                <li>固相抽出は、イオン性物質の抽出には用いない。</li>
+                <li>逆相型の固相抽出法では、一般にクロロホルム、トルエンなどの有機溶媒が用いられる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 2</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> 生体試料などの前処理における除タンパクには、化学的変性剤（酸や有機溶媒）による沈殿法や、膜を用いた限外ろ過法などが用いられます。</li>
+                    <li><strong>正しい：</strong> 固相抽出（SPE）では、逆相分配型、順相分配型、吸着型、イオン交換型など、分離目的に応じた多様な固相が利用されます。</li>
+                    <li><strong>誤り：</strong> 固相抽出は、目的成分に適した固相を選択することで効率的な抽出・精製が可能であり、抽出効率が溶媒抽出に劣るとはいえません。さらに、有機溶媒の使用量を削減でき、エマルションも形成されないという利点があります。</li>
+                    <li><strong>誤り：</strong> 固相抽出にはイオン交換型の固相も含まれており、アミノ酸や薬物などのイオン性物質の選択的抽出・精製に広く用いられます。</li>
+                    <li><strong>誤り：</strong> 逆相型の固相抽出では疎水性官能基が結合した固相を用い、水混和性の有機溶媒などが溶出に用いられます（クロロホルムやトルエンなどは通常、順相や液-液抽出で用いられます）。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- 下部ナビゲーション -->
+    <div class="question-nav">
+        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <select id="questionSelect2" class="question-select" onchange="jumpToQuestion(this.value)">
+            <option value="1">問 1</option>
+            <option value="2">問 2</option>
+            <option value="3">問 3</option>
+            <option value="4">問 4</option>
+            <option value="5">問 5</option>
+            <option value="6">問 6</option>
+            <option value="7">問 7</option>
+        </select>
+        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+    </div>
+
+    <!-- 目次へ戻るリンク -->
+    <a href="index.html" class="back-link">← 目次に戻る</a>
+
+    <!-- ページ切り替えスクリプト -->
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 7;
+
+        function updateDisplay() {
+            for (let i = 1; i <= totalQuestions; i++) {
+                const element = document.getElementById('q' + i);
+                if (element) {
+                    element.classList.remove('active');
+                }
+            }
+            const activeElement = document.getElementById('q' + currentQuestion);
+            if (activeElement) {
+                activeElement.classList.add('active');
+            }
+            document.getElementById('questionSelect').value = currentQuestion;
+            const select2 = document.getElementById('questionSelect2');
+            if (select2) {
+                select2.value = currentQuestion;
+            }
+        }
+
+        function changeQuestion(direction) {
+            currentQuestion += direction;
+            if (currentQuestion < 1) currentQuestion = 1;
+            if (currentQuestion > totalQuestions) currentQuestion = totalQuestions;
+            updateDisplay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function jumpToQuestion(questionNum) {
+            currentQuestion = parseInt(questionNum, 10);
+            updateDisplay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        updateDisplay();
+    </script>
+</body>
+</html>
