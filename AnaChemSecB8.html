@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <title>第8回 演習問題 - 分析化学演習</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #0366d6;
+            padding-bottom: 10px;
+            color: #2c3e50;
+        }
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .nav-btn {
+            background-color: #0366d6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .nav-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .question-select {
+            padding: 6px 12px;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .problem-container {
+            display: none;
+        }
+        .problem-container.active {
+            display: block;
+        }
+        .problem-box {
+            background-color: #fdfefe;
+            border-left: 4px solid #0366d6;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0 15px 0;
+        }
+        .problem-title {
+            font-weight: bold;
+            color: #0366d6;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .choices {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        .choices li {
+            margin-bottom: 8px;
+        }
+        details.answer-accordion {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        summary.answer-summary {
+            background-color: #e1e4e8;
+            color: #24292e;
+            font-weight: bold;
+            padding: 12px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+        summary.answer-summary:hover {
+            background-color: #d1d5da;
+        }
+        .answer-content {
+            padding: 20px;
+            background-color: #ffffff;
+            border-top: 1px solid #e1e4e8;
+        }
+        .answer-content ol {
+            padding-left: 20px;
+        }
+        .answer-content li {
+            margin-bottom: 12px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0366d6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>第8回 演習問題</h1>
+
+    <div class="question-nav">
+        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <select id="questionSelect" class="question-select" onchange="jumpToQuestion(this.value)">
+            <option value="1">問 1</option>
+            <option value="2">問 2</option>
+            <option value="3">問 3</option>
+            <option value="4">問 4</option>
+            <option value="5">問 5</option>
+            <option value="6">問 6</option>
+        </select>
+        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+    </div>
+
+    <!-- 問 1 -->
+    <div id="q1" class="problem-container active">
+        <div class="problem-box">
+            <div class="problem-title">【問 1】</div>
+            <p>固定相としてオクタデシルシリル（ODS）化シリカゲル、移動相としてアセトニトリルと緩衝液（pH 3）の混合溶媒を用いて、ベンゼン、トルエン及び安息香酸の分離を液体クロマトグラフィーにより行った。次の記述のうち、正しいものを２つ選べ。ただし、質量分布比を <i>k</i> とする。</p>
+            <ol class="choices">
+                <li>トルエン、ベンゼン、安息香酸の順に溶出する。</li>
+                <li>移動相中のアセトニトリルの含量を増やすと、ベンゼン、トルエン及び安息香酸の <i>k</i> は大きくなる。</li>
+                <li>ベンゼン、トルエン及び安息香酸の保持には、疎水性相互作用が働いている。</li>
+                <li>移動相中の緩衝液の pH を 3 から 7 に変えると、安息香酸の <i>k</i> は小さくなる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>3, 4</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> ODSカラム（逆相）では、疎水性が高い物質ほど固定相に強く保持されて溶出が遅くなります。トルエン（メチル基を有する） ＞ ベンゼン ＞ 安息香酸（カルボキシ基を有し極性が高い）の順で疎水性が高いため、溶出順序は「安息香酸 → ベンゼン → トルエン」となります。</li>
+                    <li><strong>誤り：</strong> 移動相に加える有機溶媒（アセトニトリル）の割合を増やすと移動相の溶出力が強まり、試料の移動相への親和性が増すため、質量分布比 <i>k</i> は小さくなります（溶出が早くなります）。</li>
+                    <li><strong>正しい：</strong> ODSカラムの固定相表面は無極性のオクタデシル基（C<sub>18</sub>）で覆われており、溶媒和した水分子の排除に伴うエントロピー効果に基づく疎水性相互作用と、化合物との間の分散力（ファンデルワールス力）の両方が関与して保持されます。</li>
+                    <li><strong>正しい：</strong> 安息香酸は弱酸（p<i>K</i><sub>a</sub> ≒ 4.2）です。pH 3 の酸性条件では主に分子型として存在するため疎水性が高く強く保持されますが、pH を 7 に上げると解離してイオン型（安息香酸イオン）となるため水への親和性が増し、固定相への保持が弱まって <i>k</i> は小さくなります。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- 問 2 -->
+    <div id="q2" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 2】</div>
+            <p>最も強い陽イオン交換能をもつ樹脂の交換基はどれか。１つ選べ。</p>
+            <ol class="choices">
+                <li>2級アミン</li>
+                <li>3級アミン</li>
+                <li>スルホン酸</li>
+                <li>カルボン酸</li>
+                <li>4級アンモニウム</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>3</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>2級アミン：</strong> 弱塩基性陰イオン交換樹脂の交換基として用いられます。</li>
+                    <li><strong>3級アミン：</strong> 弱塩基性陰イオン交換樹脂の交換基として用いられます。</li>
+                    <li><strong>スルホン酸：</strong> 強酸性陽イオン交換基（-SO<sub>3</sub>H）です。ほぼ全 pH 領域で常に完全に解離しているため、最も強い陽イオン交換能を示します。</li>
+                    <li><strong>カルボン酸：</strong> 弱酸性陽イオン交換基（-COOH）です。解離度が pH に大きく依存するため、強酸性に比べて広い pH 範囲でのイオン交換能は低くなります。</li>
+                    <li><strong>4級アンモニウム：</strong> 強塩基性陰イオン交換基（-N<sup>+</sup>(CH<sub>3</sub>)<sub>3</sub> 等）です。陰イオンの交換に用いられます。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- 問 3 -->
+    <div id="q3" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 3】</div>
+            <p>陽イオン交換クロマトグラフィーによるアミノ酸の分析に関する記述のうち、正しいのはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>陽イオン交換基としては、スルホ基や、カルボキシ基などが用いられる。</li>
+                <li>アルギニン、グルタミン酸、グリシンの分離を行ったとき、アルギニンが最初に溶出される。</li>
+                <li>移動相のイオン強度を低下させることで、保持された物質を溶出させることができる。</li>
+                <li>移動相の pH を上昇させることで、保持された物質を溶出させることができる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 4</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> 陽イオン交換樹脂には、強酸性のスルホ基（-SO<sub>3</sub>H）や弱酸性のカルボキシ基（-COOH）が交換基として用いられます（強酸性基は常に負電荷を帯びますが、弱酸性基は pH により解離状態が変化します）。</li>
+                    <li><strong>誤り：</strong> 通常、アミノ酸分析は pH 2〜3 程度の酸性緩衝液で開始されます。グルタミン酸（酸性アミノ酸、pI ≒ 3.2）はこの等電点に近く正電荷が最も小さく保持が最も弱く最初に溶出します。グリシン（中性、pI ≒ 6.0）が続き、アルギニン（塩基性アミノ酸、pI ≒ 10.8）は正電荷が最も大きく最も強く保持されるため最後に溶出します（溶出順：グルタミン酸 → グリシン → アルギニン）。</li>
+                    <li><strong>誤り：</strong> 保持された陽イオン性物質を溶出させるには、移動相の塩濃度（Na<sup>+</sup>などのイオン強度）を<strong>高めて</strong>対イオンとの競合吸着を強める必要があります。</li>
+                    <li><strong>正しい：</strong> 移動相の pH を上昇させると、アミノ酸の解離状態が変化して正電荷が減少（または負電荷が増加）するため、固定相との静電的相互作用が弱まり、保持された物質が溶出します。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- 問 4 -->
+    <div id="q4" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 4】</div>
+            <p>クロマトグラフィーに関する記述のうち、正しいのはどれか。２つ選べ。</p>
+            <ol class="choices">
+                <li>固定相としてオクタデシルシリル化したシリカゲルを用いる逆相分配クロマトグラフィーでは、極性の高い溶質が先に溶出する。</li>
+                <li>アミノ酸分析に用いられる陽イオン交換クロマトグラフィーでは、塩基性の強いアミノ酸から順に溶出される。</li>
+                <li>サイズ排除（ゲルろ過）クロマトグラフィーでは、分子量の大きな溶質から順に溶出される。</li>
+                <li>固定相としてシリカゲルを用いる吸着クロマトグラフィーでは、塩基性の溶質が先に溶出する。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 3</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> 逆相分配クロマトグラフィーでは疎水性固定相を用いるため、固定相との相互作用が弱く、移動相に分配されやすい（極性の高い）成分ほど先に溶出します。</li>
+                    <li><strong>誤り：</strong> 陽イオン交換クロマトグラフィーでは、塩基性の強いアミノ酸ほど正に強く帯電してマイナスの固定相に強く保持されるため、溶出が最も遅くなります（酸性アミノ酸から順に溶出）。</li>
+                    <li><strong>正しい：</strong> サイズ排除クロマトグラフィーでは、ゲルの細孔に入らず粒子間の隙間を通る排除限界以上の巨大分子から順に、最も早く溶出します。</li>
+                    <li><strong>誤り：</strong> シリカゲルを用いる吸着クロマトグラフィー（順相モード）では、シラノール基の極性・酸性により塩基性の溶質ほど強く吸着・保持されるため、溶出は遅くなります。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- 問 5 -->
+    <div id="q5" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 5】</div>
+            <p>日本薬局方ニカルジピン塩酸塩注射液の定量法に関する記述の正誤について、正しいものを全て選べ。</p>
+            <p style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8;">
+                本品のニカルジピン塩酸塩（C<sub>26</sub>H<sub>29</sub>N<sub>3</sub>O<sub>6</sub>・HCl）約 2 mg に対応する容量（注射液の表示量から換算して量り取る）を正確に量り、内標準溶液 5 mL を正確に加えた後、メタノールを加えて 50 mL とし、試料溶液とする。別に定量用塩酸ニカルジピンを 105℃ で２時間乾燥し、その約 50 mg 精密に量り、メタノールに溶かし、正確に 50 mL とする。この液 2 mL を正確に量り、内標準溶液 5 mL を正確に加えた後、メタノールを加えて 50 mL とし、標準溶液とする。<br><br>
+                ニカルジピン塩酸塩の量（mg）＝ <i>W</i><sub>S</sub> × ( <i>Q</i><sub>T</sub> / <i>Q</i><sub>S</sub> ) × [ A ]<br><br>
+                <strong>【試験条件】</strong><br>
+                カラム：内径 4.6 mm、長さ 15 cm のステンレス管に 5 μm の液体クロマトグラフィー用オクタデシルシリル化シリカゲルを充てんする。
+            </p>
+            <ol class="choices">
+                <li>本定量法では、試料溶液及び標準溶液を厳密に 10 μL 注入する必要がない。</li>
+                <li>ニカルジピン及び内標準物質の分離は、逆相クロマトグラフィーにより行われている。</li>
+                <li>[ A ] に入れるべき数値は 1/25 である。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>1, 2, 3 （全て正しい）</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>正しい：</strong> 内標準法では目的成分と内標準物質のピーク面積の「比」を用いるため、HPLCへの注入量の微小な変動に対する耐性（自動補正効果）があります。ただし、検出器の直線範囲内を維持するため一定量付近で注入する操作は前提となります。</li>
+                    <li><strong>正しい：</strong> 日本薬局方の試験条件として、充填剤にオクタデシルシリル化シリカゲル（ODS）が指定されているため、これは逆相クロマトグラフィーに該当します。</li>
+                    <li><strong>正しい：</strong> 標準溶液調製において、約 50 mg（<i>W</i><sub>S</sub> [mg]）を 50 mL に溶かした液から 2 mL を取って最終 50 mL に希釈しているため、原液からの濃度換算は <i>W</i><sub>S</sub> × (2 / 50) = <i>W</i><sub>S</sub> / 25 mg となります。試料側と標準側で内標準溶液の添加量（5 mL）および最終全量（50 mL）が共通のため相殺され、定数係数 [ A ] には 1/25（または 2/50）が入ります。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <!-- 問 6 -->
+    <div id="q6" class="problem-container">
+        <div class="problem-box">
+            <div class="problem-title">【問 6】</div>
+            <p>クロマトグラフィーによる物質の定量に関する記述のうち、正しいものはどれか。2つ選べ。</p>
+            <ol class="choices">
+                <li>内標準法は標準添加法ともよばれ、定量結果に対して被検成分以外の成分の影響が無視できない場合に適している。</li>
+                <li>内標準法を用いて定量を行う場合、作成する検量線の縦軸には被検成分のピーク面積又はピーク高さをとる。</li>
+                <li>内標準物質としては、被検成分に近い保持時間をもち、いずれのピークとも完全に分離する安定な物質が適している。</li>
+                <li>絶対検量線法を用いて定量を行う場合、注入操作などの測定操作を厳密に一定の条件に保つ必要はない。</li>
+                <li>ピーク面積の測定を行う場合、ピーク高さの中点におけるピーク幅にピーク高さを乗じてピーク面積を求めることができる。</li>
+            </ol>
+        </div>
+        <details class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解】</strong> <strong>3, 5</strong></p>
+                <p><strong>【解説】</strong></p>
+                <ol>
+                    <li><strong>誤り：</strong> 「内標準法」と「標準添加法」は異なる定量法です。マトリックス（共存物質）の影響を補正する手法は標準添加法です。</li>
+                    <li><strong>誤り：</strong> 内標準法では、被検成分と内標準物質の変動を同時に補正するため、検量線の縦軸には「被検成分と内標準物質のピーク面積（または高さ）の<strong>比</strong>」をとります。</li>
+                    <li><strong>正しい：</strong> 内標準物質には、被検成分と挙動が近く保持時間が近接しており、かつ他のどの成分とも重ならずに完全に分離する、化学的・物理的に安定な物質が適しています。</li>
+                    <li><strong>誤り：</strong> 絶対検量線法では注入量の変化や操作のブレがそのまま定量誤差に直結するため、サンプル注入量や測定条件を極めて厳密に一定に保つ必要があります。</li>
+                    <li><strong>正しい：</strong> ピークの近似計算（半値幅法など）では、「ピーク高さの中点における幅（半値幅）」に「ピーク高さ」を乗じることで、良好な精度でピーク面積を算出できます。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <div class="question-nav">
+        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <select id="questionSelect2" class="question-select" onchange="jumpToQuestion(this.value)">
+            <option value="1">問 1</option>
+            <option value="2">問 2</option>
+            <option value="3">問 3</option>
+            <option value="4">問 4</option>
+            <option value="5">問 5</option>
+            <option value="6">問 6</option>
+        </select>
+        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+    </div>
+
+    <a href="index.html" class="back-link">← 目次に戻る</a>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 6;
+
+        function updateDisplay() {
+            for (let i = 1; i <= totalQuestions; i++) {
+                const element = document.getElementById('q' + i);
+                if (element) {
+                    element.classList.remove('active');
+                }
+            }
+            const activeElement = document.getElementById('q' + currentQuestion);
+            if (activeElement) {
+                activeElement.classList.add('active');
+            }
+            document.getElementById('questionSelect').value = currentQuestion;
+            const select2 = document.getElementById('questionSelect2');
+            if (select2) {
+                select2.value = currentQuestion;
+            }
+        }
+
+        function changeQuestion(direction) {
+            currentQuestion += direction;
+            if (currentQuestion < 1) currentQuestion = 1;
+            if (currentQuestion > totalQuestions) currentQuestion = totalQuestions;
+            updateDisplay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function jumpToQuestion(questionNum) {
+            currentQuestion = parseInt(questionNum, 10);
+            updateDisplay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        updateDisplay();
+    </script>
+</body>
+</html>
