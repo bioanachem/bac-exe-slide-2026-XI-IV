@@ -70,10 +70,95 @@
         }
         .choices {
             margin-top: 15px;
-            padding-left: 20px;
+            padding-left: 0;
+            list-style-type: none;
         }
         .choices li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .choices input[type="checkbox"],
+        .choices input[type="radio"] {
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .choices label {
+            cursor: pointer;
+            display: inline;
+        }
+
+        /* マッチング問題用のスタイル */
+        .group-title {
+            font-weight: bold;
+            color: #555;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        .matching-list {
+            margin-top: 15px;
+            padding-left: 0;
+            list-style-type: none;
+        }
+        .matching-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            background-color: #f8f9fa;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+        .matching-label {
+            font-weight: normal;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        .matching-select {
+            padding: 6px 10px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 15px 0;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        .grading-result {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .grading-result.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .grading-result.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
         }
         details.answer-accordion {
             background-color: #f6f8fa;
@@ -81,6 +166,10 @@
             border-radius: 6px;
             margin-bottom: 30px;
             overflow: hidden;
+            display: none;
+        }
+        details.answer-accordion.unlocked {
+            display: block;
         }
         summary.answer-summary {
             background-color: #e1e4e8;
@@ -130,7 +219,7 @@
 
     <!-- 上部ナビゲーション -->
     <div class="question-nav">
-        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <button class="nav-btn prev-btn" onclick="changeQuestion(-1)">← 前の問題</button>
         <select id="questionSelect" class="question-select" onchange="jumpToQuestion(this.value)">
             <option value="1">問 1</option>
             <option value="2">問 2</option>
@@ -143,23 +232,40 @@
             <option value="9">問 9</option>
             <option value="10">問 10</option>
         </select>
-        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+        <button class="nav-btn next-btn" onclick="changeQuestion(1)">次の問題 →</button>
     </div>
 
     <!-- ==================== 問 1 ==================== -->
-    <div id="q1" class="problem-container active">
+    <div id="q1" class="problem-container active" data-type="single" data-answer="2">
         <div class="problem-box">
             <div class="problem-title">【問 1】</div>
             <p>電気泳動において、イオン性物質の移動速度と比例するのはどれか。1つ選べ。</p>
-            <ol class="choices">
-                <li>イオン性物質の半径</li>
-                <li>イオン性物質の電荷</li>
-                <li>溶液の粘度</li>
-                <li>溶液のpH</li>
-                <li>電極間の距離</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="radio" id="q1_1" name="q1" value="1">
+                    <label for="q1_1">1. イオン性物質の半径</label>
+                </li>
+                <li>
+                    <input type="radio" id="q1_2" name="q1" value="2">
+                    <label for="q1_2">2. イオン性物質の電荷</label>
+                </li>
+                <li>
+                    <input type="radio" id="q1_3" name="q1" value="3">
+                    <label for="q1_3">3. 溶液の粘度</label>
+                </li>
+                <li>
+                    <input type="radio" id="q1_4" name="q1" value="4">
+                    <label for="q1_4">4. 溶液のpH</label>
+                </li>
+                <li>
+                    <input type="radio" id="q1_5" name="q1" value="5">
+                    <label for="q1_5">5. 電極間の距離</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(1)">解答を採点する</button>
+            <div id="result1" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans1" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>2</strong></p>
@@ -178,19 +284,36 @@
     </div>
 
     <!-- ==================== 問 2 ==================== -->
-    <div id="q2" class="problem-container">
+    <div id="q2" class="problem-container" data-type="multi" data-answer="3,4">
         <div class="problem-box">
             <div class="problem-title">【問 2】</div>
             <p>電気泳動において、イオンの泳動速度に関する記述のうち、正しいものはどれか。2つ選べ。</p>
-            <ol class="choices">
-                <li>イオンの電荷に反比例する。</li>
-                <li>イオンの半径に比例する。</li>
-                <li>溶媒の粘度に反比例する。</li>
-                <li>電極間の距離に反比例する。</li>
-                <li>温度の平方根に比例する。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q2_1" name="q2" value="1">
+                    <label for="q2_1">1. イオンの電荷に反比例する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q2_2" name="q2" value="2">
+                    <label for="q2_2">2. イオンの半径に比例する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q2_3" name="q2" value="3">
+                    <label for="q2_3">3. 溶媒の粘度に反比例する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q2_4" name="q2" value="4">
+                    <label for="q2_4">4. 電極間の距離に反比例する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q2_5" name="q2" value="5">
+                    <label for="q2_5">5. 温度の平方根に比例する。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(2)">解答を採点する</button>
+            <div id="result2" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans2" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>3, 4</strong></p>
@@ -210,19 +333,36 @@
     </div>
 
     <!-- ==================== 問 3 ==================== -->
-    <div id="q3" class="problem-container">
+    <div id="q3" class="problem-container" data-type="multi" data-answer="1,4">
         <div class="problem-box">
             <div class="problem-title">【問 3】</div>
             <p>電気泳動法に関する記述のうち、正しいものはどれか。2つ選べ。</p>
-            <ol class="choices">
-                <li>イオン性物質の移動速度は電場の強さに比例する。</li>
-                <li>SDS-ポリアクリルアミドゲル電気泳動では、タンパク質は陽極から陰極に向かって泳動される。</li>
-                <li>SDS-ポリアクリルアミドゲル電気泳動では、ゲルの濃度が高いほど、タンパク質の移動度が大きくなる。</li>
-                <li>等電点電気泳動では、電極間にpH勾配を形成させてタンパク質の分離を行う。</li>
-                <li>アガロースゲル電気泳動でDNAを分離するには、試料に臭化エチジウムを加える必要がある。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q3_1" name="q3" value="1">
+                    <label for="q3_1">1. イオン性物質の移動速度は電場の強さに比例する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_2" name="q3" value="2">
+                    <label for="q3_2">2. SDS-ポリアクリルアミドゲル電気泳動では、タンパク質は陽極から陰極に向かって泳動される。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_3" name="q3" value="3">
+                    <label for="q3_3">3. SDS-ポリアクリルアミドゲル電気泳動では、ゲルの濃度が高いほど、タンパク質の移動度が大きくなる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_4" name="q3" value="4">
+                    <label for="q3_4">4. 等電点電気泳動では、電極間にpH勾配を形成させてタンパク質の分離を行う。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_5" name="q3" value="5">
+                    <label for="q3_5">5. アガロースゲル電気泳動でDNAを分離するには、試料に臭化エチジウムを加える必要がある。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(3)">解答を採点する</button>
+            <div id="result3" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans3" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>1, 4</strong></p>
@@ -239,19 +379,36 @@
     </div>
 
     <!-- ==================== 問 4 ==================== -->
-    <div id="q4" class="problem-container">
+    <div id="q4" class="problem-container" data-type="multi" data-answer="2,4">
         <div class="problem-box">
             <div class="problem-title">【問 4】</div>
             <p>電気泳動法に関する記述のうち、正しいものはどれか。2つ選べ。</p>
-            <ol class="choices">
-                <li>pH 2.0 の泳動液を用いてろ紙電気泳動を行うと、グリシンは陽極方向に泳動される。</li>
-                <li>SDS-ポリアクリルアミドゲル電気泳動では、一般に、タンパク質はそのアミノ酸残基の数に比例したSDS分子が結合した状態で泳動される。</li>
-                <li>SDS-ゲル電気泳動法では、物質の分子量は分離にほとんど影響しない。</li>
-                <li>等電点電気泳動法では、物質の分子量は分離にほとんど影響しない。</li>
-                <li>アガロースゲル電気泳動でDNAが分子サイズによって分離できるのは、DNAごとに単位電荷当りの質量が異なるからである。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q4_1" name="q4" value="1">
+                    <label for="q4_1">1. pH 2.0 の泳動液を用いてろ紙電気泳動を行うと、グリシンは陽極方向に泳動される。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_2" name="q4" value="2">
+                    <label for="q4_2">2. SDS-ポリアクリルアミドゲル電気泳動では、一般に、タンパク質はそのアミノ酸残基の数に比例したSDS分子が結合した状態で泳動される。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_3" name="q4" value="3">
+                    <label for="q4_3">3. SDS-ゲル電気泳動法では、物質の分子量は分離にほとんど影響しない。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_4" name="q4" value="4">
+                    <label for="q4_4">4. 等電点電気泳動法では、物質の分子量は分離にほとんど影響しない。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_5" name="q4" value="5">
+                    <label for="q4_5">5. アガロースゲル電気泳動でDNAが分子サイズによって分離できるのは、DNAごとに単位電荷当りの質量が異なるからである。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(4)">解答を採点する</button>
+            <div id="result4" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans4" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>2, 4</strong></p>
@@ -268,50 +425,105 @@
     </div>
 
     <!-- ==================== 問 5 ==================== -->
-    <div id="q5" class="problem-container">
+    <div id="q5" class="problem-container" data-type="matching" data-answer="5,1,2,4,3">
         <div class="problem-box">
             <div class="problem-title">【問 5】</div>
-            <p>A群に示す目的で汎用される検出法を、B群の中から選びなさい。</p>
-            <p style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8;">
-                (1) タンパク質を非特異的に検出する方法<br>
-                (2) 核酸を配列非特異的に検出する方法<br>
-                (3) タンパク質をアミノ酸配列あるいは構造特異的に検出する方法<br>
-                (4) RNAを配列特異的に検出する方法<br>
-                (5) DNAを配列特異的に検出する方法
-            </p>
-            <p style="margin-top: 15px; font-weight: bold; color: #555;">【B群の選択肢】</p>
-            <ol class="choices" style="list-style-type: none; padding-left: 0;">
+            <p>A群に示す(1)〜(5)の各目的に対応する最も適切な検出法を、B群の選択肢からそれぞれ選んで組み合わせなさい。</p>
+            
+            <p class="group-title">【A群】</p>
+
+            <ul class="matching-list">
+                <li class="matching-item">
+                    <span class="matching-label">(1) タンパク質を非特異的に検出する方法</span>
+                    <select id="q5_1" class="matching-select">
+                        <option value="">選択してください</option>
+                        <option value="1">① 臭化エチジウム染色</option>
+                        <option value="2">② ウエスタンブロッティング</option>
+                        <option value="3">③ サザンハイブリダイゼーション</option>
+                        <option value="4">④ ノーザンハイブリダイゼーション</option>
+                        <option value="5">⑤ CBB染色</option>
+                    </select>
+                </li>
+                <li class="matching-item">
+                    <span class="matching-label">(2) 核酸を配列非特異的に検出する方法</span>
+                    <select id="q5_2" class="matching-select">
+                        <option value="">選択してください</option>
+                        <option value="1">① 臭化エチジウム染色</option>
+                        <option value="2">② ウエスタンブロッティング</option>
+                        <option value="3">③ サザンハイブリダイゼーション</option>
+                        <option value="4">④ ノーザンハイブリダイゼーション</option>
+                        <option value="5">⑤ CBB染色</option>
+                    </select>
+                </li>
+                <li class="matching-item">
+                    <span class="matching-label">(3) タンパク質をアミノ酸配列あるいは構造特異的に検出する方法</span>
+                    <select id="q5_3" class="matching-select">
+                        <option value="">選択してください</option>
+                        <option value="1">① 臭化エチジウム染色</option>
+                        <option value="2">② ウエスタンブロッティング</option>
+                        <option value="3">③ サザンハイブリダイゼーション</option>
+                        <option value="4">④ ノーザンハイブリダイゼーション</option>
+                        <option value="5">⑤ CBB染色</option>
+                    </select>
+                </li>
+                <li class="matching-item">
+                    <span class="matching-label">(4) RNAを配列特異的に検出する方法</span>
+                    <select id="q5_4" class="matching-select">
+                        <option value="">選択してください</option>
+                        <option value="1">① 臭化エチジウム染色</option>
+                        <option value="2">② ウエスタンブロッティング</option>
+                        <option value="3">③ サザンハイブリダイゼーション</option>
+                        <option value="4">④ ノーザンハイブリダイゼーション</option>
+                        <option value="5">⑤ CBB染色</option>
+                    </select>
+                </li>
+                <li class="matching-item">
+                    <span class="matching-label">(5) DNAを配列特異的に検出する方法</span>
+                    <select id="q5_5" class="matching-select">
+                        <option value="">選択してください</option>
+                        <option value="1">① 臭化エチジウム染色</option>
+                        <option value="2">② ウエスタンブロッティング</option>
+                        <option value="3">③ サザンハイブリダイゼーション</option>
+                        <option value="4">④ ノーザンハイブリダイゼーション</option>
+                        <option value="5">⑤ CBB染色</option>
+                    </select>
+                </li>
+            </ul>
+
+            <p class="group-title">【B群の選択肢】</p>
+            <ul style="background-color: #f8f9fa; padding: 12px 20px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8; list-style-type: none; margin-bottom: 15px;">
                 <li>① 臭化エチジウム染色</li>
                 <li>② ウエスタンブロッティング</li>
                 <li>③ サザンハイブリダイゼーション</li>
                 <li>④ ノーザンハイブリダイゼーション</li>
                 <li>⑤ CBB染色</li>
-            </ol>
-        </div>
-        <details class="answer-accordion">
-            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            </ul>
 
-<div class="answer-content">
-    <p><strong>【正解・対応】</strong></p>
-    <ul style="list-style-type: none; padding-left: 0;">
-        <li>(1) タンパク質を非特異的に検出する方法： <strong>⑤ CBB染色</strong><br>
-            <em>解説：</em> クマシーブリリアントブルー（CBB）染色は、ゲル中の多くのタンパク質と結合して青色に染める非特異的な検出法です。</li>
-        <li>(2) 核酸を配列非特異的に検出する方法： <strong>① 臭化エチジウム染色</strong><br>
-            <em>解説：</em> 臭化エチジウムは核酸の塩基対間にインターカレーションし、紫外線を当てると蛍光を発するため、塩基配列に関わらず核酸を非特異的に検出できます。</li>
-        <li>(3) タンパク質をアミノ酸配列あるいは構造特異的に検出する方法： <strong>② ウエスタンブロッティング</strong><br>
-            <em>解説：</em> ウエスタンブロッティングは、目的のタンパク質に特異的な抗体を用いて、抗体が認識するエピトープ（抗原決定基）を介した抗原抗体反応により検出します。エピトープには、連続したアミノ酸配列からなるものや、立体構造によって形成されるものがあります。</li>
-        <li>(4) RNAを配列特異的に検出する方法： <strong>④ ノーザンハイブリダイゼーション</strong><br>
-            <em>解説：</em> ノーザンハイブリダイゼーションは、相補的な塩基配列を持つプローブを用いてRNAを配列特異的に検出する手法です。</li>
-        <li>(5) DNAを配列特異的に検出する方法： <strong>③ サザンハイブリダイゼーション</strong><br>
-            <em>解説：</em> サザンハイブリダイゼーションは、相補的な標識DNAまたはRNAプローブを用いてDNAを配列特異的に検出します。</li>
-    </ul>
-</div>
-           
+            <button class="submit-btn" onclick="gradeQuestion(5)">解答を採点する</button>
+            <div id="result5" class="grading-result"></div>
+        </div>
+        <details id="ans5" class="answer-accordion">
+            <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
+            <div class="answer-content">
+                <p><strong>【正解・対応】</strong></p>
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li>(1) タンパク質を非特異的に検出する方法： <strong>⑤ CBB染色</strong><br>
+                        <em>解説：</em> クマシーブリリアントブルー（CBB）染色は、ゲル中の多くのタンパク質と結合して青色に染める非特異的な検出法です。</li>
+                    <li>(2) 核酸を配列非特異的に検出する方法： <strong>① 臭化エチジウム染色</strong><br>
+                        <em>解説：</em> 臭化エチジウムは核酸の塩基対間にインターカレーションし、紫外線を当てると蛍光を発するため、塩基配列に関わらず核酸を非特異的に検出できます。</li>
+                    <li>(3) タンパク質をアミノ酸配列あるいは構造特異的に検出する方法： <strong>② ウエスタンブロッティング</strong><br>
+                        <em>解説：</em> ウエスタンブロッティングは、目的のタンパク質に特異的な抗体を用いて、抗体が認識するエピトープ（抗原決定基）を介した抗原抗体反応により検出します。エピトープには、連続したアミノ酸配列からなるものや、立体構造によって形成されるものがあります。</li>
+                    <li>(4) RNAを配列特異的に検出する方法： <strong>④ ノーザンハイブリダイゼーション</strong><br>
+                        <em>解説：</em> ノーザンハイブリダイゼーションは、相補的な塩基配列を持つプローブを用いてRNAを配列特異的に検出する手法です。</li>
+                    <li>(5) DNAを配列特異的に検出する方法： <strong>③ サザンハイブリダイゼーション</strong><br>
+                        <em>解説：</em> サザンハイブリダイゼーションは、相補的な標識DNAまたはRNAプローブを用いてDNAを配列特異的に検出します。</li>
+                </ul>
+            </div>
         </details>
     </div>
 
     <!-- ==================== 問 6 ==================== -->
-    <div id="q6" class="problem-container">
+    <div id="q6" class="problem-container" data-type="multi" data-answer="1,4">
         <div class="problem-box">
             <div class="problem-title">【問 6】</div>
             <p>マウスのある組織から目的のタンパク質を精製し、その性質を明らかにするため、以下の2つの実験を行った。実験方法と考察に関する記述のうち、正しいものはどれか。2つ選べ。</p>
@@ -319,18 +531,34 @@
                 <strong>【実験1】</strong> 精製したタンパク質のジスルフィド結合を還元後、ドデシル硫酸ナトリウム (SDS)-ポリアクリルアミドゲル電気泳動法を行った。ゲル中のタンパク質を染色すると、単一のバンドが観察された。分子量が既知の5種類の標準タンパク質についても同様の操作を行い、図1の結果を得た。<br>
                 <strong>【実験2】</strong> 精製したタンパク質を用いてゲルろ過クロマトグラフィーを行った。分子量が既知の6種類の標準タンパク質についても同様の操作を行い、図2の結果を得た。
             </p>
-            <!-- 問6の図（問6図.png を同じフォルダに配置してください） -->
             <img src="問6図.png" alt="問6の実験図1および図2" class="problem-img">
 
-            <ol class="choices">
-                <li>【実験1】では、電気泳動の前に、試料にSDS と 2-メルカプトエタノール (2-ME) を含む緩衝液を加えて加熱した。</li>
-                <li>【実験1】のタンパク質の染色には、臭化エチジウム (ethidium bromide) を用いた。</li>
-                <li>【実験2】では、カラムから溶出したタンパク質を検出するため、溶出液の 260nm における吸光度を連続的に測定した。</li>
-                <li>【実験1】の結果より、精製したタンパク質の単量体(モノマー)の分子量は、およそ25,000Daと考えられる。</li>
-                <li>【実験1】及び【実験2】の結果より、精製したタンパク質は4量体(テトラマー) として存在すると考えられる。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q6_1" name="q6" value="1">
+                    <label for="q6_1">1. 【実験1】では、電気泳動の前に、試料にSDS と 2-メルカプトエタノール (2-ME) を含む緩衝液を加えて加熱した。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_2" name="q6" value="2">
+                    <label for="q6_2">2. 【実験1】のタンパク質の染色には、臭化エチジウム (ethidium bromide) を用いた。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_3" name="q6" value="3">
+                    <label for="q6_3">3. 【実験2】では、カラムから溶出したタンパク質を検出するため、溶出液の 260nm における吸光度を連続的に測定した。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_4" name="q6" value="4">
+                    <label for="q6_4">4. 【実験1】の結果より、精製したタンパク質の単量体(モノマー)の分子量は、およそ25,000Daと考えられる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_5" name="q6" value="5">
+                    <label for="q6_5">5. 【実験1】及び【実験2】の結果より、精製したタンパク質は4量体(テトラマー) として存在すると考えられる。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(6)">解答を採点する</button>
+            <div id="result6" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans6" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>1, 4</strong></p>
@@ -347,23 +575,39 @@
     </div>
 
     <!-- ==================== 問 7 ==================== -->
-    <div id="q7" class="problem-container">
+    <div id="q7" class="problem-container" data-type="multi" data-answer="2,3">
         <div class="problem-box">
             <div class="problem-title">【問 7】</div>
             <p>タンパク質Ｘを含む細胞抽出液（試料ア）をドデシル硫酸ナトリウムポリアクリルアミドゲル電気泳動（SDS-PAGE）及びサイズ排除クロマトグラフィー（SEC）により分析した。SDS-PAGE に際し、試料 ア にSDS と2-メルカプトエタノールを添加して前処理した（試料 イ ）。図1 のレーンＡは分子量が 25 kDa、35 kDa、40 kDa、55 kDa の 4 種の分子量マーカータンパク質を示し、レーンＢは試料 イ を分離したときの泳動結果である。図2 は精製したタンパク質Ｘ溶液（試料 ウ）と上記の 4 種の分子量マーカータンパク質を混合して分離したときのクロマトグラムである。以下の記述のうち、正しいのはどれか。2つ選べ。</p>
             
-            <!-- 問7の図（問7図.png を同じフォルダに配置してください） -->
             <img src="問7図.png" alt="問7の図1および図2" class="problem-img">
 
-            <ol class="choices">
-                <li>SDS-PAGEでは、試料イのようにタンパク質をSDS と2-メルカプトエタノールで酸化的に前処理することで分子量に基づいた分離が可能になる。</li>
-                <li>SDS-PAGE において、タンパク質は陰極から陽極に向かって移動する。</li>
-                <li>タンパク質Xの分子量は、40 kDa から 55 kDa の間である。</li>
-                <li>SEC の固定相として、オクタデシルシリル化シリカゲルが用いられる。</li>
-                <li>SEC によりタンパク質Xが単量体として溶出されるとき、そのピークは④である。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q7_1" name="q7" value="1">
+                    <label for="q7_1">1. SDS-PAGEでは、試料イのようにタンパク質をSDS と2-メルカプトエタノールで酸化的に前処理することで分子量に基づいた分離が可能になる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q7_2" name="q7" value="2">
+                    <label for="q7_2">2. SDS-PAGE において、タンパク質は陰極から陽極に向かって移動する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q7_3" name="q7" value="3">
+                    <label for="q7_3">3. タンパク質Xの分子量は、40 kDa から 55 kDa の間である。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q7_4" name="q7" value="4">
+                    <label for="q7_4">4. SEC の固定相として、オクタデシルシリル化シリカゲルが用いられる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q7_5" name="q7" value="5">
+                    <label for="q7_5">5. SEC によりタンパク質Xが単量体として溶出されるとき、そのピークは④である。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(7)">解答を採点する</button>
+            <div id="result7" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans7" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>2, 3</strong></p>
@@ -380,58 +624,91 @@
     </div>
 
     <!-- ==================== 問 8 ==================== -->
-    <div id="q8" class="problem-container">
+    <div id="q8" class="problem-container" data-type="single" data-answer="3">
         <div class="problem-box">
             <div class="problem-title">【問 8】</div>
             <p>二次元電気泳動は、等電点電気泳動とSDSポリアクリルアミドゲル電気泳動（SDS-PAGE）を組み合せたもので、ある生体試料中の多種多様なタンパク質をそれぞれ固有の等電点と分子量の違いを利用して分離する方法である。図1と図2は、二次元電気泳動の概要と実験結果を示したものである。</p>
-<p style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8;">
-<strong>【図1　等電点電気泳動】</strong> pH 4～10の連続的なpH勾配を形成させた棒状のゲルを準備する。このゲルを用いて電気泳動すると、試料中の各タンパク質はそれぞれの等電点の位置までゲル中を移動する。（注：実際にはこの段階ではゲルは染色しないためタンパク質は見えないが、図1の下段では電気泳動後にタンパク質が等電点で分離しているイメージを示した。）<br>
-<strong>【図2　SDS-PAGE】</strong> 等電点電気泳動により試料中のタンパク質を分離した棒状ゲルを、SDS-PAGEの分離ゲルの上に移し、一次元目の等電点電気泳動と直角の方向に電気泳動する。タンパク質は、その分子量に応じた位置まで移動する。<br>
-<strong>【実験結果】</strong> 電気泳動の終了後、泳動用のガラス板から取り出したゲルを洗浄し、クマシーブリリアントブルーでタンパク質を染色したところ、50個のスポットを検出した。図2中のスポットAは、等電点5.8、分子量56,000のタンパク質である。
-</p>
-<p>このようなタンパク質分析法とその実験結果に関する記述のうち、誤っているのはどれか。1つ選べ。</p>
+            <p style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; border: 1px solid #e9ecef; font-size: 0.90rem; line-height: 1.8;">
+                <strong>【図1 等電点電気泳動】</strong> pH 4～10の連続的なpH勾配を形成させた棒状のゲルを準備する。このゲルを用いて電気泳動すると、試料中の各タンパク質はそれぞれの等電点の位置までゲル中を移動する。<br>
+                <strong>【図2 SDS-PAGE】</strong> 等電点電気泳動により試料中のタンパク質を分離した棒状ゲルを、SDS-PAGEの分離ゲルの上に移し、一次元目の等電点電気泳動と直角の方向に電気泳動する。タンパク質は、その分子量に応じた位置まで移動する。<br>
+                <strong>【実験結果】</strong> 電気泳動の終了後、泳動用のガラス板から取り出したゲルを洗浄し、クマシーブリリアントブルーでタンパク質を染色したところ、50個のスポットを検出した。図2中のスポットAは、等電点5.8、分子量56,000のタンパク質である。
+            </p>
+            <p>このようなタンパク質分析法とその実験結果に関する記述のうち、誤っているのはどれか。1つ選べ。</p>
             
-            <!-- 問8の図（問8図.png を同じフォルダに配置してください） -->
             <img src="問8図.png" alt="問8の図1および図2" class="problem-img">
 
-            <ol class="choices">
-                <li>等電点が5.8より小さく、かつ分子量が56,000より大きいスポットは4つ検出されている。</li>
-                <li>スポットAのタンパク質では、中性溶液中での分子全体の電荷が負になる。</li>
-                <li>スポットBのタンパク質の等電点は、ほぼ5.8である。</li>
-                <li>スポットCのタンパク質は、分子量56,000より小さい。</li>
-                <li>タンパク質のスポットの位置は、リン酸化により、やや右上方向に移動すると推測される。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="radio" id="q8_1" name="q8" value="1">
+                    <label for="q8_1">1. 等電点が5.8より小さく、かつ分子量が56,000より大きいスポットは4つ検出されている。</label>
+                </li>
+                <li>
+                    <input type="radio" id="q8_2" name="q8" value="2">
+                    <label for="q8_2">2. スポットAのタンパク質では、中性溶液中での分子全体の電荷が負になる。</label>
+                </li>
+                <li>
+                    <input type="radio" id="q8_3" name="q8" value="3">
+                    <label for="q8_3">3. スポットBのタンパク質の等電点は、ほぼ5.8である。</label>
+                </li>
+                <li>
+                    <input type="radio" id="q8_4" name="q8" value="4">
+                    <label for="q8_4">4. スポットCのタンパク質は、分子量56,000より小さい。</label>
+                </li>
+                <li>
+                    <input type="radio" id="q8_5" name="q8" value="5">
+                    <label for="q8_5">5. タンパク質のスポットの位置は、リン酸化により、やや右上方向に移動すると推測される。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(8)">解答を採点する</button>
+            <div id="result8" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans8" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>3</strong></p>
                 <p><strong>【解説】</strong></p>
                 <ol>
-  <li><strong>正しい：</strong>縦の点線の右（等電点5.8より小さい）で、横の点線の上（分子量56,000より大きい）の領域に、スポットが4つある。</li>
-  <li><strong>正しい：</strong>溶液のpHが等電点よりも高い場合、そのタンパク質は負に帯電する。よって、スポット<strong>A</strong>のタンパク質（等電点5.8）では、中性溶液（pH 7）中での分子全体の電荷が負になる。</li>
-  <li><strong>誤り：</strong>スポット<strong>B</strong>のタンパク質の等電点は、ほぼ6.6である。</li>
-  <li><strong>正しい：</strong>Cは横の点線より下にあり、分子量56,000より小さい。</li>
-  <li><strong>正しい：</strong>タンパク質がリン酸化されると、分子量が増えるとともに等電点が低下する。そのため、タンパク質のスポットの位置は、リン酸化により、やや右上方向に移動すると推測される。</li>
-             </ol>
+                    <li><strong>正しい：</strong> 縦の点線の右（等電点5.8より小さい）で、横の点線の上（分子量56,000より大きい）の領域に、スポットが4つある。</li>
+                    <li><strong>正しい：</strong> 溶液のpHが等電点よりも高い場合、そのタンパク質は負に帯電する。よって、スポット<strong>A</strong>のタンパク質（等電点5.8）では、中性溶液（pH 7）中での分子全体の電荷が負になる。</li>
+                    <li><strong>誤り：</strong> スポット<strong>B</strong>のタンパク質の等電点は、ほぼ6.6である。</li>
+                    <li><strong>正しい：</strong> Cは横の点線より下にあり、分子量56,000より小さい。</li>
+                    <li><strong>正しい：</strong> タンパク質がリン酸化されると、分子量が増えるとともに等電点が低下する。そのため、タンパク質のスポットの位置は、リン酸化により、やや右上方向に移動すると推測される。</li>
+                </ol>
             </div>
         </details>
     </div>
 
     <!-- ==================== 問 9 ==================== -->
-    <div id="q9" class="problem-container">
+    <div id="q9" class="problem-container" data-type="multi" data-answer="4,5">
         <div class="problem-box">
             <div class="problem-title">【問 9】</div>
-            <p>キャピラリー電気泳動に関する次の記述のうち、正しいのはどれか。2つ選べ。</p>
-            <ol class="choices">
-                <li>中性の電解質溶液を満たしたフューズドシリカ製キャピラリーの内壁は、シラノール基の解離により正電荷を帯びる。</li>
-                <li>pH7の電解質溶液を満たしたフューズドシリカ (fused silica)製の毛細管を用いて泳動を行う場合、毛細管内部の溶液は陰極から陽極に向かって移動する。</li>
-                <li>キャピラリーゾーン電気泳動では、泳動液のpHが高いほど、中性試料成分の泳動速度が遅くなる。</li>
-                <li>ミセル動電クロマトグラフィーでは、泳動液にイオン性界面活性剤を添加することで、中性物質の分離が達成される。</li>
-                <li>検出器として紫外可視吸光光度計や蛍光光度計が用いられる。</li>
-            </ol>
+            <p>キャピラリー電気泳動に関する次の記述のうち、正しいものはどれか。2つ選べ。</p>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q9_1" name="q9" value="1">
+                    <label for="q9_1">1. 中性の電解質溶液を満たしたフューズドシリカ製キャピラリーの内壁は、シラノール基の解離により正電荷を帯びる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q9_2" name="q9" value="2">
+                    <label for="q9_2">2. pH7の電解質溶液を満たしたフューズドシリカ (fused silica)製の毛細管を用いて泳動を行う場合、毛細管内部の溶液は陰極から陽極に向かって移動する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q9_3" name="q9" value="3">
+                    <label for="q9_3">3. キャピラリーゾーン電気泳動では、泳動液のpHが高いほど、中性試料成分の泳動速度が遅くなる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q9_4" name="q9" value="4">
+                    <label for="q9_4">4. ミセル動電クロマトグラフィーでは、泳動液にイオン性界面活性剤を添加することで、中性物質の分離が達成される。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q9_5" name="q9" value="5">
+                    <label for="q9_5">5. 検出器として紫外可視吸光光度計や蛍光光度計が用いられる。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(9)">解答を採点する</button>
+            <div id="result9" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans9" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>4, 5</strong></p>
@@ -448,19 +725,36 @@
     </div>
 
     <!-- ==================== 問 10 ==================== -->
-    <div id="q10" class="problem-container">
+    <div id="q10" class="problem-container" data-type="multi" data-answer="4,5">
         <div class="problem-box">
             <div class="problem-title">【問 10】</div>
-            <p>キャピラリー電気泳動に関する次の記述のうち、正しいのはどれか。2つ選べ。</p>
-            <ol class="choices">
-                <li>キャピラリーゾーン電気泳動でDNAの分離を行う場合、DNAの鎖長が2倍になると泳動速度も2倍になる。</li>
-                <li>液体クロマトグラフィーと比較して、CEで試料の拡散が少ないのは、電気浸透流が層流であるためである。</li>
-                <li>フューズドシリカ製キャピラリーと中性の緩衝液を用いて電気泳動を行うと、陰イオン性物質は中性物質よりも速く泳動される。</li>
-                <li>ミセル動電クロマトグラフィーでは、中性物質とともにイオン性物質の分離も可能である。</li>
-                <li>キャピラリーゲル電気泳動でDNAを分離すると、サイズの小さなものから順に検出される。</li>
-            </ol>
+            <p>キャピラリー電気泳動に関する次の記述のうち、正しいものはどれか。2つ選べ。</p>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q10_1" name="q10" value="1">
+                    <label for="q10_1">1. キャピラリーゾーン電気泳動でDNAの分離を行う場合、DNAの鎖長が2倍になると泳動速度も2倍になる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q10_2" name="q10" value="2">
+                    <label for="q10_2">2. 液体クロマトグラフィーと比較して、CEで試料の拡散が少ないのは、電気浸透流が層流であるためである。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q10_3" name="q10" value="3">
+                    <label for="q10_3">3. フューズドシリカ製キャピラリーと中性の緩衝液を用いて電気泳動を行うと、陰イオン性物質は中性物質よりも速く泳動される。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q10_4" name="q10" value="4">
+                    <label for="q10_4">4. ミセル動電クロマトグラフィーでは、中性物質とともにイオン性物質の分離も可能である。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q10_5" name="q10" value="5">
+                    <label for="q10_5">5. キャピラリーゲル電気泳動でDNAを分離すると、サイズの小さなものから順に検出される。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(10)">解答を採点する</button>
+            <div id="result10" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans10" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>4, 5</strong></p>
@@ -478,7 +772,7 @@
 
     <!-- 下部ナビゲーション -->
     <div class="question-nav">
-        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <button class="nav-btn prev-btn" onclick="changeQuestion(-1)">← 前の問題</button>
         <select id="questionSelect2" class="question-select" onchange="jumpToQuestion(this.value)">
             <option value="1">問 1</option>
             <option value="2">問 2</option>
@@ -491,13 +785,13 @@
             <option value="9">問 9</option>
             <option value="10">問 10</option>
         </select>
-        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+        <button class="nav-btn next-btn" onclick="changeQuestion(1)">次の問題 →</button>
     </div>
 
     <!-- 目次へ戻るリンク -->
     <a href="index.html" class="back-link">← 目次に戻る</a>
 
-    <!-- ページ切り替えスクリプト -->
+    <!-- ページ切り替え・採点スクリプト -->
     <script>
         let currentQuestion = 1;
         const totalQuestions = 10;
@@ -518,6 +812,30 @@
             if (select2) {
                 select2.value = currentQuestion;
             }
+
+            // 問1のときは「前の問題」を「目次に戻る」に、問10のときは「次の問題」を「目次に戻る」に動的変更
+            const prevBtns = document.querySelectorAll('.prev-btn');
+            const nextBtns = document.querySelectorAll('.next-btn');
+
+            prevBtns.forEach(btn => {
+                if (currentQuestion === 1) {
+                    btn.textContent = '← 目次に戻る';
+                    btn.onclick = function() { window.location.href = 'index.html'; };
+                } else {
+                    btn.textContent = '← 前の問題';
+                    btn.onclick = function() { changeQuestion(-1); };
+                }
+            });
+
+            nextBtns.forEach(btn => {
+                if (currentQuestion === totalQuestions) {
+                    btn.textContent = '目次に戻る →';
+                    btn.onclick = function() { window.location.href = 'index.html'; };
+                } else {
+                    btn.textContent = '次の問題 →';
+                    btn.onclick = function() { changeQuestion(1); };
+                }
+            });
         }
 
         function changeQuestion(direction) {
@@ -532,6 +850,82 @@
             currentQuestion = parseInt(questionNum, 10);
             updateDisplay();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function gradeQuestion(qNum) {
+            const container = document.getElementById('q' + qNum);
+            const resultDiv = document.getElementById('result' + qNum);
+            const accordion = document.getElementById('ans' + qNum);
+            const type = container.getAttribute('data-type');
+            const correctStr = container.getAttribute('data-answer');
+
+            // 問5のマッチング形式判定処理
+            if (type === 'matching') {
+                let userAnswers = [];
+                let unselected = false;
+
+                for (let i = 1; i <= 5; i++) {
+                    const val = document.getElementById('q5_' + i).value;
+                    if (!val) {
+                        unselected = true;
+                        break;
+                    }
+                    userAnswers.push(val);
+                }
+
+                if (unselected) {
+                    alert('(1)〜(5)のすべての選択肢を選んでください。');
+                    return;
+                }
+
+                const correctArr = correctStr.split(',');
+                const isCorrect = JSON.stringify(correctArr) === JSON.stringify(userAnswers);
+
+                if (isCorrect) {
+                    resultDiv.className = 'grading-result correct';
+                    resultDiv.innerHTML = '全問正解です！おめでとうございます。下の解説を確認できます。';
+                } else {
+                    resultDiv.className = 'grading-result incorrect';
+                    resultDiv.innerHTML = '一部または全問が不正解です…。解説を確認して復習しましょう。';
+                }
+
+                accordion.classList.add('unlocked');
+                return;
+            }
+
+            // 通常の選択問題処理（単一選択・複数選択）
+            let userAnswers = [];
+
+            if (type === 'single') {
+                const selected = container.querySelector('input[name="q' + qNum + '"]:checked');
+                if (selected) {
+                    userAnswers.push(selected.value);
+                }
+            } else {
+                const checked = container.querySelectorAll('input[name="q' + qNum + '"]:checked');
+                checked.forEach(input => {
+                    userAnswers.push(input.value);
+                });
+            }
+
+            if (userAnswers.length === 0) {
+                alert('選択肢が選ばれていません。解答を選択してください。');
+                return;
+            }
+
+            const correctArr = correctStr.split(',').sort();
+            const userArr = userAnswers.sort();
+            const isCorrect = JSON.stringify(correctArr) === JSON.stringify(userArr);
+
+            if (isCorrect) {
+                resultDiv.className = 'grading-result correct';
+                resultDiv.innerHTML = '正解です！おめでとうございます。下の解説を確認できます。';
+            } else {
+                resultDiv.className = 'grading-result incorrect';
+                resultDiv.innerHTML = '不正解です…。解説を確認して復習しましょう。';
+            }
+
+            accordion.classList.add('unlocked');
         }
 
         updateDisplay();

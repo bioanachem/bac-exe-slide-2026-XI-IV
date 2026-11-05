@@ -70,10 +70,57 @@
         }
         .choices {
             margin-top: 15px;
-            padding-left: 20px;
+            padding-left: 0;
+            list-style-type: none;
         }
         .choices li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .choices input[type="checkbox"],
+        .choices input[type="radio"] {
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .choices label {
+            cursor: pointer;
+            display: inline;
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 15px 0;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        .grading-result {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .grading-result.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .grading-result.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
         }
         details.answer-accordion {
             background-color: #f6f8fa;
@@ -81,6 +128,10 @@
             border-radius: 6px;
             margin-bottom: 30px;
             overflow: hidden;
+            display: none;
+        }
+        details.answer-accordion.unlocked {
+            display: block;
         }
         summary.answer-summary {
             background-color: #e1e4e8;
@@ -114,14 +165,18 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        .nowrap-text {
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
 
     <h1>第8回 演習問題</h1>
 
+    <!-- 上部ナビゲーション -->
     <div class="question-nav">
-        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <button class="nav-btn prev-btn" onclick="changeQuestion(-1)">← 前の問題</button>
         <select id="questionSelect" class="question-select" onchange="jumpToQuestion(this.value)">
             <option value="1">問 1</option>
             <option value="2">問 2</option>
@@ -130,22 +185,36 @@
             <option value="5">問 5</option>
             <option value="6">問 6</option>
         </select>
-        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+        <button class="nav-btn next-btn" onclick="changeQuestion(1)">次の問題 →</button>
     </div>
 
     <!-- 問 1 -->
-    <div id="q1" class="problem-container active">
+    <div id="q1" class="problem-container active" data-type="multi" data-answer="3,4">
         <div class="problem-box">
             <div class="problem-title">【問 1】</div>
             <p>固定相としてオクタデシルシリル（ODS）化シリカゲル、移動相としてアセトニトリルと緩衝液（pH 3）の混合溶媒を用いて、ベンゼン、トルエン及び安息香酸の分離を液体クロマトグラフィーにより行った。次の記述のうち、正しいものを２つ選べ。ただし、質量分布比を <i>k</i> とする。</p>
-            <ol class="choices">
-                <li>トルエン、ベンゼン、安息香酸の順に溶出する。</li>
-                <li>移動相中のアセトニトリルの含量を増やすと、ベンゼン、トルエン及び安息香酸の <i>k</i> は大きくなる。</li>
-                <li>ベンゼン、トルエン及び安息香酸の保持には、疎水性相互作用が働いている。</li>
-                <li>移動相中の緩衝液の pH を 3 から 7 に変えると、安息香酸の <i>k</i> は小さくなる。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q1_1" name="q1" value="1">
+                    <label for="q1_1">1. トルエン、ベンゼン、安息香酸の順に溶出する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q1_2" name="q1" value="2">
+                    <label for="q1_2">2. 移動相中のアセトニトリルの含量を増やすと、ベンゼン、トルエン及び<span class="nowrap-text">安息香酸の <i>k</i> は</span>大きくなる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q1_3" name="q1" value="3">
+                    <label for="q1_3">3. ベンゼン、トルエン及び安息香酸の保持には、疎水性相互作用が働いている。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q1_4" name="q1" value="4">
+                    <label for="q1_4">4. 移動相中の緩衝液の pH を 3 から 7 に変えると、<span class="nowrap-text">安息香酸の <i>k</i> は</span>小さくなる。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(1)">解答を採点する</button>
+            <div id="result1" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans1" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>3, 4</strong></p>
@@ -161,19 +230,36 @@
     </div>
 
     <!-- 問 2 -->
-    <div id="q2" class="problem-container">
+    <div id="q2" class="problem-container" data-type="single" data-answer="3">
         <div class="problem-box">
             <div class="problem-title">【問 2】</div>
             <p>最も強い陽イオン交換能をもつ樹脂の交換基はどれか。１つ選べ。</p>
-            <ol class="choices">
-                <li>2級アミン</li>
-                <li>3級アミン</li>
-                <li>スルホン酸</li>
-                <li>カルボン酸</li>
-                <li>4級アンモニウム</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="radio" id="q2_1" name="q2" value="1">
+                    <label for="q2_1">1. 2級アミン</label>
+                </li>
+                <li>
+                    <input type="radio" id="q2_2" name="q2" value="2">
+                    <label for="q2_2">2. 3級アミン</label>
+                </li>
+                <li>
+                    <input type="radio" id="q2_3" name="q2" value="3">
+                    <label for="q2_3">3. スルホン酸</label>
+                </li>
+                <li>
+                    <input type="radio" id="q2_4" name="q2" value="4">
+                    <label for="q2_4">4. カルボン酸</label>
+                </li>
+                <li>
+                    <input type="radio" id="q2_5" name="q2" value="5">
+                    <label for="q2_5">5. 4級アンモニウム</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(2)">解答を採点する</button>
+            <div id="result2" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans2" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>3</strong></p>
@@ -190,18 +276,32 @@
     </div>
 
     <!-- 問 3 -->
-    <div id="q3" class="problem-container">
+    <div id="q3" class="problem-container" data-type="multi" data-answer="1,4">
         <div class="problem-box">
             <div class="problem-title">【問 3】</div>
             <p>陽イオン交換クロマトグラフィーによるアミノ酸の分析に関する記述のうち、正しいのはどれか。２つ選べ。</p>
-            <ol class="choices">
-                <li>陽イオン交換基としては、スルホ基や、カルボキシ基などが用いられる。</li>
-                <li>アルギニン、グルタミン酸、グリシンの分離を行ったとき、アルギニンが最初に溶出される。</li>
-                <li>移動相のイオン強度を低下させることで、保持された物質を溶出させることができる。</li>
-                <li>移動相の pH を上昇させることで、保持された物質を溶出させることができる。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q3_1" name="q3" value="1">
+                    <label for="q3_1">1. 陽イオン交換基としては、スルホ基や、カルボキシ基などが用いられる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_2" name="q3" value="2">
+                    <label for="q3_2">2. アルギニン、グルタミン酸、グリシンの分離を行ったとき、アルギニンが最初に溶出される。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_3" name="q3" value="3">
+                    <label for="q3_3">3. 移動相のイオン強度を低下させることで、保持された物質を溶出させることができる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_4" name="q3" value="4">
+                    <label for="q3_4">4. 移動相の pH を上昇させることで、保持された物質を溶出させることができる。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(3)">解答を採点する</button>
+            <div id="result3" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans3" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>1, 4</strong></p>
@@ -217,18 +317,32 @@
     </div>
 
     <!-- 問 4 -->
-    <div id="q4" class="problem-container">
+    <div id="q4" class="problem-container" data-type="multi" data-answer="1,3">
         <div class="problem-box">
             <div class="problem-title">【問 4】</div>
             <p>クロマトグラフィーに関する記述のうち、正しいのはどれか。２つ選べ。</p>
-            <ol class="choices">
-                <li>固定相としてオクタデシルシリル化したシリカゲルを用いる逆相分配クロマトグラフィーでは、極性の高い溶質が先に溶出する。</li>
-                <li>アミノ酸分析に用いられる陽イオン交換クロマトグラフィーでは、塩基性の強いアミノ酸から順に溶出される。</li>
-                <li>サイズ排除（ゲルろ過）クロマトグラフィーでは、分子量の大きな溶質から順に溶出される。</li>
-                <li>固定相としてシリカゲルを用いる吸着クロマトグラフィーでは、塩基性の溶質が先に溶出する。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q4_1" name="q4" value="1">
+                    <label for="q4_1">1. 固定相としてオクタデシルシリル化したシリカゲルを用いる逆相分配クロマトグラフィーでは、極性の高い溶質が先に溶出する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_2" name="q4" value="2">
+                    <label for="q4_2">2. アミノ酸分析に用いられる陽イオン交換クロマトグラフィーでは、塩基性の強いアミノ酸から順に溶出される。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_3" name="q4" value="3">
+                    <label for="q4_3">3. サイズ排除（ゲルろ過）クロマトグラフィーでは、分子量の大きな溶質から順に溶出される。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_4" name="q4" value="4">
+                    <label for="q4_4">4. 固定相としてシリカゲルを用いる吸着クロマトグラフィーでは、塩基性の溶質が先に溶出する。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(4)">解答を採点する</button>
+            <div id="result4" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans4" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>1, 3</strong></p>
@@ -244,7 +358,7 @@
     </div>
 
     <!-- 問 5 -->
-    <div id="q5" class="problem-container">
+    <div id="q5" class="problem-container" data-type="multi" data-answer="1,2,3">
         <div class="problem-box">
             <div class="problem-title">【問 5】</div>
             <p>日本薬局方ニカルジピン塩酸塩注射液の定量法に関する記述の正誤について、正しいものを全て選べ。</p>
@@ -254,13 +368,24 @@
                 <strong>【試験条件】</strong><br>
                 カラム：内径 4.6 mm、長さ 15 cm のステンレス管に 5 μm の液体クロマトグラフィー用オクタデシルシリル化シリカゲルを充てんする。
             </p>
-            <ol class="choices">
-                <li>本定量法では、試料溶液及び標準溶液を厳密に 10 μL 注入する必要がない。</li>
-                <li>ニカルジピン及び内標準物質の分離は、逆相クロマトグラフィーにより行われている。</li>
-                <li>[ A ] に入れるべき数値は 1/25 である。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q5_1" name="q5" value="1">
+                    <label for="q5_1">1. 本定量法では、試料溶液及び標準溶液を厳密に 10 μL 注入する必要がない。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q5_2" name="q5" value="2">
+                    <label for="q5_2">2. ニカルジピン及び内標準物質の分離は、逆相クロマトグラフィーにより行われている。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q5_3" name="q5" value="3">
+                    <label for="q5_3">3. [ A ] に入れるべき数値は 1/25 である。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(5)">解答を採点する</button>
+            <div id="result5" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans5" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>1, 2, 3 （全て正しい）</strong></p>
@@ -275,19 +400,36 @@
     </div>
 
     <!-- 問 6 -->
-    <div id="q6" class="problem-container">
+    <div id="q6" class="problem-container" data-type="multi" data-answer="3,5">
         <div class="problem-box">
             <div class="problem-title">【問 6】</div>
             <p>クロマトグラフィーによる物質の定量に関する記述のうち、正しいものはどれか。2つ選べ。</p>
-            <ol class="choices">
-                <li>内標準法は標準添加法ともよばれ、定量結果に対して被検成分以外の成分の影響が無視できない場合に適している。</li>
-                <li>内標準法を用いて定量を行う場合、作成する検量線の縦軸には被検成分のピーク面積又はピーク高さをとる。</li>
-                <li>内標準物質としては、被検成分に近い保持時間をもち、いずれのピークとも完全に分離する安定な物質が適している。</li>
-                <li>絶対検量線法を用いて定量を行う場合、注入操作などの測定操作を厳密に一定の条件に保つ必要はない。</li>
-                <li>ピーク面積の測定を行う場合、ピーク高さの中点におけるピーク幅にピーク高さを乗じてピーク面積を求めることができる。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q6_1" name="q6" value="1">
+                    <label for="q6_1">1. 内標準法は標準添加法ともよばれ、定量結果に対して被検成分以外の成分の影響が無視できない場合に適している。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_2" name="q6" value="2">
+                    <label for="q6_2">2. 内標準法を用いて定量を行う場合、作成する検量線の縦軸には被検成分のピーク面積又はピーク高さをとる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_3" name="q6" value="3">
+                    <label for="q6_3">3. 内標準物質としては、被検成分に近い保持時間をもち、いずれのピークとも完全に分離する安定な物質が適している。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_4" name="q6" value="4">
+                    <label for="q6_4">4. 絶対検量線法を用いて定量を行う場合、注入操作などの測定操作を厳密に一定の条件に保つ必要はない。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_5" name="q6" value="5">
+                    <label for="q6_5">5. ピーク面積の測定を行う場合、ピーク高さの中点におけるピーク幅にピーク高さを乗じてピーク面積を求めることができる。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(6)">解答を採点する</button>
+            <div id="result6" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans6" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>3, 5</strong></p>
@@ -303,8 +445,9 @@
         </details>
     </div>
 
+    <!-- 下部ナビゲーション -->
     <div class="question-nav">
-        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <button class="nav-btn prev-btn" onclick="changeQuestion(-1)">← 前の問題</button>
         <select id="questionSelect2" class="question-select" onchange="jumpToQuestion(this.value)">
             <option value="1">問 1</option>
             <option value="2">問 2</option>
@@ -313,7 +456,7 @@
             <option value="5">問 5</option>
             <option value="6">問 6</option>
         </select>
-        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+        <button class="nav-btn next-btn" onclick="changeQuestion(1)">次の問題 →</button>
     </div>
 
     <a href="index.html" class="back-link">← 目次に戻る</a>
@@ -338,6 +481,30 @@
             if (select2) {
                 select2.value = currentQuestion;
             }
+
+            // 問1のときは「前の問題」を「目次に戻る」に、問6のときは「次の問題」を「目次に戻る」に動的変更
+            const prevBtns = document.querySelectorAll('.prev-btn');
+            const nextBtns = document.querySelectorAll('.next-btn');
+
+            prevBtns.forEach(btn => {
+                if (currentQuestion === 1) {
+                    btn.textContent = '← 目次に戻る';
+                    btn.onclick = function() { window.location.href = 'index.html'; };
+                } else {
+                    btn.textContent = '← 前の問題';
+                    btn.onclick = function() { changeQuestion(-1); };
+                }
+            });
+
+            nextBtns.forEach(btn => {
+                if (currentQuestion === totalQuestions) {
+                    btn.textContent = '目次に戻る →';
+                    btn.onclick = function() { window.location.href = 'index.html'; };
+                } else {
+                    btn.textContent = '次の問題 →';
+                    btn.onclick = function() { changeQuestion(1); };
+                }
+            });
         }
 
         function changeQuestion(direction) {
@@ -352,6 +519,47 @@
             currentQuestion = parseInt(questionNum, 10);
             updateDisplay();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function gradeQuestion(qNum) {
+            const container = document.getElementById('q' + qNum);
+            const type = container.getAttribute('data-type');
+            const correctStr = container.getAttribute('data-answer');
+            const resultDiv = document.getElementById('result' + qNum);
+            const accordion = document.getElementById('ans' + qNum);
+
+            let userAnswers = [];
+
+            if (type === 'single') {
+                const selected = container.querySelector('input[name="q' + qNum + '"]:checked');
+                if (selected) {
+                    userAnswers.push(selected.value);
+                }
+            } else {
+                const checked = container.querySelectorAll('input[name="q' + qNum + '"]:checked');
+                checked.forEach(input => {
+                    userAnswers.push(input.value);
+                });
+            }
+
+            if (userAnswers.length === 0) {
+                alert('選択肢が選ばれていません。解答を選択してください。');
+                return;
+            }
+
+            const correctArr = correctStr.split(',').sort();
+            const userArr = userAnswers.sort();
+            const isCorrect = JSON.stringify(correctArr) === JSON.stringify(userArr);
+
+            if (isCorrect) {
+                resultDiv.className = 'grading-result correct';
+                resultDiv.innerHTML = '正解です！おめでとうございます。下の解説を確認できます。';
+            } else {
+                resultDiv.className = 'grading-result incorrect';
+                resultDiv.innerHTML = '不正解です…。解説を確認して復習しましょう。';
+            }
+
+            accordion.classList.add('unlocked');
         }
 
         updateDisplay();

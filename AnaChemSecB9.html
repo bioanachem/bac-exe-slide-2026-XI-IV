@@ -70,10 +70,57 @@
         }
         .choices {
             margin-top: 15px;
-            padding-left: 20px;
+            padding-left: 0;
+            list-style-type: none;
         }
         .choices li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .choices input[type="checkbox"],
+        .choices input[type="radio"] {
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .choices label {
+            cursor: pointer;
+            display: inline;
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 15px 0;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        .grading-result {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .grading-result.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .grading-result.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
         }
         details.answer-accordion {
             background-color: #f6f8fa;
@@ -81,6 +128,10 @@
             border-radius: 6px;
             margin-bottom: 30px;
             overflow: hidden;
+            display: none;
+        }
+        details.answer-accordion.unlocked {
+            display: block;
         }
         summary.answer-summary {
             background-color: #e1e4e8;
@@ -122,7 +173,7 @@
 
     <!-- 上部ナビゲーション -->
     <div class="question-nav">
-        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <button class="nav-btn prev-btn" onclick="changeQuestion(-1)">← 前の問題</button>
         <select id="questionSelect" class="question-select" onchange="jumpToQuestion(this.value)">
             <option value="1">問 1</option>
             <option value="2">問 2</option>
@@ -131,22 +182,36 @@
             <option value="5">問 5</option>
             <option value="6">問 6</option>
         </select>
-        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+        <button class="nav-btn next-btn" onclick="changeQuestion(1)">次の問題 →</button>
     </div>
 
     <!-- ==================== 問 1 ==================== -->
-    <div id="q1" class="problem-container active">
+    <div id="q1" class="problem-container active" data-type="multi" data-answer="1,3">
         <div class="problem-box">
             <div class="problem-title">【問 1】</div>
             <p>クロマトグラフィーに関する記述のうち、正しいものはどれか。２つ選べ。</p>
-            <ol class="choices">
-                <li>カラムの長さが２倍になると、保持時間（<i>t</i><sub>R</sub>）は２倍になる。</li>
-                <li>カラムの長さが２倍になると、質量分布比（<i>k</i>'）は２倍になる。</li>
-                <li>カラムの長さが２倍になると、理論段数（<i>N</i>）は２倍になる。</li>
-                <li>カラムの長さが２倍になると、理論段高さ（<i>H</i>）は２倍になる。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q1_1" name="q1" value="1">
+                    <label for="q1_1">1. カラムの長さが２倍になると、保持時間（<i>t</i><sub>R</sub>）は２倍になる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q1_2" name="q1" value="2">
+                    <label for="q1_2">2. カラムの長さが２倍になると、質量分布比（<i>k</i>'）は２倍になる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q1_3" name="q1" value="3">
+                    <label for="q1_3">3. カラムの長さが２倍になると、理論段数（<i>N</i>）は２倍になる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q1_4" name="q1" value="4">
+                    <label for="q1_4">4. カラムの長さが２倍になると、理論段高さ（<i>H</i>）は２倍になる。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(1)">解答を採点する</button>
+            <div id="result1" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans1" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>1, 3</strong></p>
@@ -162,19 +227,36 @@
     </div>
 
     <!-- ==================== 問 2 ==================== -->
-    <div id="q2" class="problem-container">
+    <div id="q2" class="problem-container" data-type="multi" data-answer="1,4">
         <div class="problem-box">
             <div class="problem-title">【問 2】</div>
             <p>クロマトグラフィーの分離パラメータに関する記述のうち、正しいものはどれか。２つ選べ。</p>
-            <ol class="choices">
-                <li>ピーク高さと保持時間が同じなら、ピーク幅が狭いほど理論段数（<i>N</i>）は大きい。</li>
-                <li>シンメトリー係数（<i>S</i>）が１より小さいとき、ピークはテーリングしている。</li>
-                <li>カラムの長さが２倍になると、理論段高さ（<i>H</i>）は２倍になる。</li>
-                <li>同一の分離条件で２つの化合物の保持時間が同じ場合、両者の分離係数（<i>α</i>）は１である。</li>
-                <li>分離度（<i>R</i><sub>s</sub>）は、２つのピークの保持時間の関係を示し、ピーク幅に依存しない。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q2_1" name="q2" value="1">
+                    <label for="q2_1">1. ピーク高さと保持時間が同じなら、ピーク幅が狭いほど理論段数（<i>N</i>）は大きい。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q2_2" name="q2" value="2">
+                    <label for="q2_2">2. シンメトリー係数（<i>S</i>）が１より小さいとき、ピークはテーリングしている。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q2_3" name="q2" value="3">
+                    <label for="q2_3">3. カラムの長さが２倍になると、理論段高さ（<i>H</i>）は２倍になる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q2_4" name="q2" value="4">
+                    <label for="q2_4">4. 同一の分離条件で２つの化合物の保持時間が同じ場合、両者の分離係数（<i>α</i>）は１である。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q2_5" name="q2" value="5">
+                    <label for="q2_5">5. 分離度（<i>R</i><sub>s</sub>）は、２つのピークの保持時間の関係を示し、ピーク幅に依存しない。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(2)">解答を採点する</button>
+            <div id="result2" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans2" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>1, 4</strong></p>
@@ -191,19 +273,36 @@
     </div>
 
     <!-- ==================== 問 3 ==================== -->
-    <div id="q3" class="problem-container">
+    <div id="q3" class="problem-container" data-type="multi" data-answer="2,5">
         <div class="problem-box">
             <div class="problem-title">【問 3】</div>
             <p>液体クロマトグラフィーに関する記述のうち、正しいものはどれか。２つ選べ。</p>
-            <ol class="choices">
-                <li>質量分布比（<i>k</i>'）が小さいほど、試料はカラムに保持されやすい。</li>
-                <li>理論段数（<i>N</i>）が大きい値を示すほど、優れた分離系である。</li>
-                <li>カラムの理論段数は、カラムの長さに依存しない。</li>
-                <li>ピークの完全分離とは、分離度（<i>R</i><sub>s</sub>）1.2 以上を意味する。</li>
-                <li>カラムの理論段高さは、最適流速で最小となる。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q3_1" name="q3" value="1">
+                    <label for="q3_1">1. 質量分布比（<i>k</i>'）が小さいほど、試料はカラムに保持されやすい。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_2" name="q3" value="2">
+                    <label for="q3_2">2. 理論段数（<i>N</i>）が大きい値を示すほど、優れた分離系である。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_3" name="q3" value="3">
+                    <label for="q3_3">3. カラムの理論段数は、カラムの長さに依存しない。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_4" name="q3" value="4">
+                    <label for="q3_4">4. ピークの完全分離とは、分離度（<i>R</i><sub>s</sub>）1.2 以上を意味する。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q3_5" name="q3" value="5">
+                    <label for="q3_5">5. カラムの理論段高さは、最適流速で最小となる。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(3)">解答を採点する</button>
+            <div id="result3" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans3" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>2, 5</strong></p>
@@ -220,7 +319,7 @@
     </div>
 
     <!-- ==================== 問 4 ==================== -->
-    <div id="q4" class="problem-container">
+    <div id="q4" class="problem-container" data-type="multi" data-answer="3,5">
         <div class="problem-box">
             <div class="problem-title">【問 4】</div>
             <p>以下は日本薬局方アセトアミノフェンの純度試験（液体クロマトグラフィー）の記述の一部である。次の記述のうち、正しいものはどれか。２つ選べ。</p>
@@ -233,15 +332,32 @@
                 ・流量：アセトアミノフェンの保持時間が約 5 分になるように調整する。<br>
                 ・カラムの選定：本品及び 4-アミノフェノール塩酸塩 0.01 g ずつをメタノール 1 mLに溶かし、移動相を加えて 50 mL とする。この液 1 mL をとり、移動相を加えて 10 mL とする。この液に付き、上記の条件で操作するとき、[ Ｄ ] の順に溶出し、その Ｅ 分離度が 7 以上のものを用いる。
             </p>
-            <ol class="choices">
-                <li>Ａの検出器の光源には、通常、キセノンランプが用いられる。</li>
-                <li>Ｂのオクタデシルシリル化シリカゲルは順相系の固定相である。</li>
-                <li>Ｃの移動相中のメタノール含量を増やすと、アセトアミノフェンの保持時間は短くなる。</li>
-                <li>Ｄは、アセトアミノフェン、4-アミノフェノールの順である。</li>
-                <li>Ｅの条件をみたすとき、分離度が 1.5 以上であるので、2 つのピークは完全分離している。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q4_1" name="q4" value="1">
+                    <label for="q4_1">1. Ａの検出器の光源には、通常、キセノンランプが用いられる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_2" name="q4" value="2">
+                    <label for="q4_2">2. Ｂのオクタデシルシリル化シリカゲルは順相系の固定相である。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_3" name="q4" value="3">
+                    <label for="q4_3">3. Ｃの移動相中のメタノール含量を増やすと、アセトアミノフェンの保持時間は短くなる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_4" name="q4" value="4">
+                    <label for="q4_4">4. Ｄは、アセトアミノフェン、4-アミノフェノールの順である。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q4_5" name="q4" value="5">
+                    <label for="q4_5">5. Ｅの条件をみたすとき、分離度が 1.5 以上であるので、2 つのピークは完全分離している。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(4)">解答を採点する</button>
+            <div id="result4" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans4" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>3, 5</strong></p>
@@ -258,26 +374,43 @@
     </div>
 
     <!-- ==================== 問 5 ==================== -->
-    <div id="q5" class="problem-container">
+    <div id="q5" class="problem-container" data-type="single" data-answer="2">
         <div class="problem-box">
             <div class="problem-title">【問 5】</div>
             <p>液体クロマトグラフィーを用いて生体成分や薬物を定量分析する際には、高感度化や選択性の向上を目的として誘導体化する場合が多い。誘導体化に関する記述のうち、誤っているものはどれか。１つ選べ。</p>
-            <ol class="choices">
-                <li>プレカラム誘導体化法では、長時間を要する誘導体化反応を利用できる。</li>
-                <li><strong>誤り：</strong> ニンヒドリンは、一級アミノ酸と反応するとR基が脱離し、どのアミノ酸からも同じ構造の色素（ルーヘマン紫）が生成します。そのため、プレカラムで誘導体化するとアミノ酸の種類を区別して分離できません。ニンヒドリンは、分離後に反応させるポストカラム法で用いられます。</li>
-                <li>ポストカラム誘導体化法は、試料中の夾雑成分の影響を受けにくい。</li>
-                <li>ポストカラム誘導体化法では、1つの分析対象物から複数の誘導体が生成しても問題ない。</li>
-                <li>ジアステレオマー誘導体化法によって、鏡像異性体を光学不活性なカラムで分離することができる。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="radio" id="q5_1" name="q5" value="1">
+                    <label for="q5_1">1. プレカラム誘導体化法では、長時間を要する誘導体化反応を利用できる。</label>
+                </li>
+                <li>
+                    <input type="radio" id="q5_2" name="q5" value="2">
+                    <label for="q5_2">2. ニンヒドリンを反応試薬として用いるプレカラム誘導体化法によって、アミノ酸を一斉分析することが可能である。</label>
+                </li>
+                <li>
+                    <input type="radio" id="q5_3" name="q5" value="3">
+                    <label for="q5_3">3. ポストカラム誘導体化法は、試料中の夾雑成分の影響を受けにくい。</label>
+                </li>
+                <li>
+                    <input type="radio" id="q5_4" name="q5" value="4">
+                    <label for="q5_4">4. ポストカラム誘導体化法では、1つの分析対象物から複数の誘導体が生成しても問題ない。</label>
+                </li>
+                <li>
+                    <input type="radio" id="q5_5" name="q5" value="5">
+                    <label for="q5_5">5. ジアステレオマー誘導体化法によって、鏡像異性体を光学不活性なカラムで分離することができる。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(5)">解答を採点する</button>
+            <div id="result5" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans5" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>2</strong></p>
                 <p><strong>【解説】</strong></p>
                 <ol>
                     <li><strong>正しい：</strong> プレカラム法はカラムに注入する前に反応を完結させるため、加熱や長時間を要する反応も利用できます。</li>
-                    <li><strong>誤り：</strong> ニンヒドリンは、多くの一級アミノ酸と反応し、同じ構造の色素（ルーヘマン紫）を生成します。そのため、ニンヒドリンでプレカラム誘導体化すると、生成した色素から元のアミノ酸の種類を区別することが困難になります。こうした理由から、ニンヒドリンは、アミノ酸を分離した後に反応させるポストカラム法で用いられます。</li>
+                    <li><strong>誤り：</strong> ニンヒドリンは、一級アミノ酸と反応するとR基が脱離し、どのアミノ酸からも同じ構造の色素（ルーヘマン紫）が生成します。そのため、プレカラムで誘導体化するとアミノ酸の種類を区別して分離できません。ニンヒドリンは、分離後に反応させるポストカラム法で用いられます。</li>
                     <li><strong>正しい：</strong> ポストカラム法は、夾雑成分をカラムで分離したあとに反応試薬をオンラインで添加するため、試料マトリックス（夾雑成分）の影響を受けにくいという利点があります。</li>
                     <li><strong>正しい：</strong> ポストカラム法では分離後に反応が起きるため、仮に1つの対象物から複数の誘導体ができてもプレカラム法のようなピーク分裂は起きず、反応生成比が一定であれば定量に支障ありません。</li>
                     <li><strong>正しい：</strong> 光学活性な試薬を用いてジアステレオマーに変換すれば、光学不活性な（アキラルな）ODSカラムなどで分離が可能になります。</li>
@@ -287,18 +420,32 @@
     </div>
 
     <!-- ==================== 問 6 ==================== -->
-    <div id="q6" class="problem-container">
+    <div id="q6" class="problem-container" data-type="multi" data-answer="2,4">
         <div class="problem-box">
             <div class="problem-title">【問 6】</div>
             <p>液体クロマトグラフィーを用いた鏡像異性体の分離法には、キラル固定相法、キラル移動相法、ジアステレオマー誘導体化法がある。各法に関する記述のうち、正しいものはどれか。２つ選べ。</p>
-            <ol class="choices">
-                <li>キラル移動相法では、分析対象物に対する対掌体を移動相溶液に添加してエナンチオマー分離を行う。</li>
-                <li>ジアステレオマー誘導体化法は、誘導体化により通常の分配クロマトグラフィーで分離することを目的とする。</li>
-                <li>あるラセミ混合物を分離したとき、異性体間のピークの分離度（<i>R</i><sub>s</sub>）は 1.2 であった。このとき、2つのピークは完全分離しているといえる。</li>
-                <li>キラルカラムに固定化される光学活性な高分子として、多糖類誘導体やタンパク質が広く用いられている。</li>
-            </ol>
+            <ul class="choices">
+                <li>
+                    <input type="checkbox" id="q6_1" name="q6" value="1">
+                    <label for="q6_1">1. キラル移動相法では、分析対象物に対する対掌体を移動相溶液に添加してエナンチオマー分離を行う。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_2" name="q6" value="2">
+                    <label for="q6_2">2. ジアステレオマー誘導体化法は、誘導体化により通常の分配クロマトグラフィーで分離することを目的とする。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_3" name="q6" value="3">
+                    <label for="q6_3">3. あるラセミ混合物を分離したとき、異性体間のピークの分離度（<i>R</i><sub>s</sub>）は 1.2 であった。このとき、2つのピークは完全分離しているといえる。</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="q6_4" name="q6" value="4">
+                    <label for="q6_4">4. キラルカラムに固定化される光学活性な高分子として、多糖類誘導体やタンパク質が広く用いられている。</label>
+                </li>
+            </ul>
+            <button class="submit-btn" onclick="gradeQuestion(6)">解答を採点する</button>
+            <div id="result6" class="grading-result"></div>
         </div>
-        <details class="answer-accordion">
+        <details id="ans6" class="answer-accordion">
             <summary class="answer-summary">▶ 解答・解説を表示する（クリックで開閉）</summary>
             <div class="answer-content">
                 <p><strong>【正解】</strong> <strong>2, 4</strong></p>
@@ -315,7 +462,7 @@
 
     <!-- 下部ナビゲーション -->
     <div class="question-nav">
-        <button class="nav-btn" onclick="changeQuestion(-1)">← 前の問題</button>
+        <button class="nav-btn prev-btn" onclick="changeQuestion(-1)">← 前の問題</button>
         <select id="questionSelect2" class="question-select" onchange="jumpToQuestion(this.value)">
             <option value="1">問 1</option>
             <option value="2">問 2</option>
@@ -324,13 +471,13 @@
             <option value="5">問 5</option>
             <option value="6">問 6</option>
         </select>
-        <button class="nav-btn" onclick="changeQuestion(1)">次の問題 →</button>
+        <button class="nav-btn next-btn" onclick="changeQuestion(1)">次の問題 →</button>
     </div>
 
     <!-- 目次へ戻るリンク -->
     <a href="index.html" class="back-link">← 目次に戻る</a>
 
-    <!-- ページ切り替えスクリプト -->
+    <!-- ページ切り替え・採点スクリプト -->
     <script>
         let currentQuestion = 1;
         const totalQuestions = 6;
@@ -351,6 +498,30 @@
             if (select2) {
                 select2.value = currentQuestion;
             }
+
+            // 問1のときは「前の問題」を「目次に戻る」に、問6のときは「次の問題」を「目次に戻る」に動的変更
+            const prevBtns = document.querySelectorAll('.prev-btn');
+            const nextBtns = document.querySelectorAll('.next-btn');
+
+            prevBtns.forEach(btn => {
+                if (currentQuestion === 1) {
+                    btn.textContent = '← 目次に戻る';
+                    btn.onclick = function() { window.location.href = 'index.html'; };
+                } else {
+                    btn.textContent = '← 前の問題';
+                    btn.onclick = function() { changeQuestion(-1); };
+                }
+            });
+
+            nextBtns.forEach(btn => {
+                if (currentQuestion === totalQuestions) {
+                    btn.textContent = '目次に戻る →';
+                    btn.onclick = function() { window.location.href = 'index.html'; };
+                } else {
+                    btn.textContent = '次の問題 →';
+                    btn.onclick = function() { changeQuestion(1); };
+                }
+            });
         }
 
         function changeQuestion(direction) {
@@ -365,6 +536,47 @@
             currentQuestion = parseInt(questionNum, 10);
             updateDisplay();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function gradeQuestion(qNum) {
+            const container = document.getElementById('q' + qNum);
+            const type = container.getAttribute('data-type');
+            const correctStr = container.getAttribute('data-answer');
+            const resultDiv = document.getElementById('result' + qNum);
+            const accordion = document.getElementById('ans' + qNum);
+
+            let userAnswers = [];
+
+            if (type === 'single') {
+                const selected = container.querySelector('input[name="q' + qNum + '"]:checked');
+                if (selected) {
+                    userAnswers.push(selected.value);
+                }
+            } else {
+                const checked = container.querySelectorAll('input[name="q' + qNum + '"]:checked');
+                checked.forEach(input => {
+                    userAnswers.push(input.value);
+                });
+            }
+
+            if (userAnswers.length === 0) {
+                alert('選択肢が選ばれていません。解答を選択してください。');
+                return;
+            }
+
+            const correctArr = correctStr.split(',').sort();
+            const userArr = userAnswers.sort();
+            const isCorrect = JSON.stringify(correctArr) === JSON.stringify(userArr);
+
+            if (isCorrect) {
+                resultDiv.className = 'grading-result correct';
+                resultDiv.innerHTML = '正解です！おめでとうございます。下の解説を確認できます。';
+            } else {
+                resultDiv.className = 'grading-result incorrect';
+                resultDiv.innerHTML = '不正解です…。解説を確認して復習しましょう。';
+            }
+
+            accordion.classList.add('unlocked');
         }
 
         updateDisplay();
